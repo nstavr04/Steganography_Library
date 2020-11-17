@@ -5,12 +5,11 @@ int main() {
     printf("Testing\n");
     printf("Testing2\n");
     printf("Test\n");
-    printf("!");
+    printf("!\n");
 
     for (int i=0; i<10; i++){
         printf("%d\n", i);
     }
-
 
     return 0;
 }
