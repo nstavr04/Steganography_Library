@@ -6,5 +6,11 @@ int main() {
     printf("Testing2\n");
     printf("Test\n");
     printf("!");
+
+    for (int i=0; i<10; i++){
+        printf("%d\n", i);
+    }
+
+
     return 0;
 }
