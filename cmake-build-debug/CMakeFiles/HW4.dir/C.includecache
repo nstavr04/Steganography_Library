@@ -1,0 +1,20 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+C:/Users/nikol/Desktop/University/3rd Semester/EPL232 Programming Techniques/EPL232 HW/HW4/bmp.c
+stdio.h
+-
+stdlib.h
+-
+string.h
+-
+bmp.h
+C:/Users/nikol/Desktop/University/3rd Semester/EPL232 Programming Techniques/EPL232 HW/HW4/bmp.h
+
+C:/Users/nikol/Desktop/University/3rd Semester/EPL232 Programming Techniques/EPL232 HW/HW4/bmp.h
+
