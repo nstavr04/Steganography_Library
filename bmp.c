@@ -48,7 +48,7 @@ unsigned char *LoadBitmapFile(char *filename, BITMAPFILEHEADER *bitmapFileHeader
     }
 
     //read in the bitmap image data
-    fread(bitmapImage, 3,bitmapInfoHeader->biSizeImage, filePtr);
+    fread(bitmapImage,bitmapInfoHeader->biSizeImage,1, filePtr);
 
     //make sure bitmap image data was read
     if (bitmapImage == NULL) {
@@ -100,7 +100,6 @@ void function1(BITMAPFILEHEADER bitmapFileHeader,BITMAPINFOHEADER bitmapInfoHead
 
 int main() {
 
-
     BITMAPFILEHEADER b1;
 
     BITMAPINFOHEADER b2;
@@ -124,16 +123,17 @@ int main() {
 
     filePtr = fopen("image2new.bmp", "wb");
 
-    if (filePtr == NULL)
-        return NULL;
+    if (filePtr == NULL) {
+        printf("Can't write on file");
+        return 0;
+    }
 
     BITMAPFILEHEADER *ptr1 = &bitmapFileHeader;
     BITMAPINFOHEADER *ptr2 = &bitmapInfoHeader;
 
     fwrite(ptr1, sizeof(BITMAPFILEHEADER), 1, filePtr);
     fwrite(ptr2, sizeof(BITMAPINFOHEADER), 1, filePtr);
-    fwrite(bitmapData, sizeof(bitmapInfoHeader.biSizeImage), 1, filePtr);
-
+    fwrite(bitmapData, bitmapInfoHeader.biSizeImage, 1, filePtr);
 
     return 0;
 
