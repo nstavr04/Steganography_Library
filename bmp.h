@@ -2,11 +2,13 @@
 // Created by mvasil17 & nstavr04 on 18/11/2020.
 //
 
-#ifndef HW4_BMP_H
+#ifndef BMP_H
+#define BMP_H
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#define BMP_H
+
 
 /**
  * Bitmap file header
@@ -47,5 +49,4 @@ void imageInfo(BITMAPFILEHEADER bitmapFileHeader, BITMAPINFOHEADER bitmapInfoHea
 //BITMAPINFOHEADER *ReadBMInfoHeader(FILE *fp);
 
 //int SizeOfInformationHeader(FILE *fp);
-
-#endif //HW4_BMP_H
+#endif
