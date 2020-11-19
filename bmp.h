@@ -1,8 +1,11 @@
 //
-// Created by 35799 on 18/11/2020.
+// Created by mvasil17 & nstavr04 on 18/11/2020.
 //
 
 #ifndef HW4_BMP_H
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 #define BMP_H
 
 /**
@@ -35,9 +38,14 @@ typedef struct tagBITMAPINFOHEADER {    /*  40 bytes  */
     unsigned long  biClrImportant;  /* 4 bytes */   // Specifies the number of color that are 'important' for the bitmap, if set to zero, all colors are important.
 } BITMAPINFOHEADER;
 
-BITMAPFILEHEADER *ReadBMFileHeader(FILE *fp);
-BITMAPINFOHEADER *ReadBMInfoHeader(FILE *fp);
+unsigned char *LoadBitmapFile(char *filename, BITMAPFILEHEADER *bitmapFileHeader, BITMAPINFOHEADER *bitmapInfoHeader);
 
-int SizeOfInformationHeader(FILE *fp);
+void imageInfo(BITMAPFILEHEADER bitmapFileHeader, BITMAPINFOHEADER bitmapInfoHeader);
+
+
+//BITMAPFILEHEADER *ReadBMFileHeader(FILE *fp);
+//BITMAPINFOHEADER *ReadBMInfoHeader(FILE *fp);
+
+//int SizeOfInformationHeader(FILE *fp);
 
 #endif //HW4_BMP_H

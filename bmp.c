@@ -1,9 +1,7 @@
 //
 // Created by mvasil17 & nstavr04 on 18/11/2020.
 //
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
+
 #include "bmp.h"
 
 
@@ -25,7 +23,7 @@ unsigned char *LoadBitmapFile(char *filename, BITMAPFILEHEADER *bitmapFileHeader
     fread(bitmapFileHeader, sizeof(BITMAPFILEHEADER), 1, filePtr);
 
     //verify that this is a bmp file by check bitmap id
-    if ((bitmapFileHeader->bfType1) != 0x42 && (bitmapFileHeader->bfType2) != 0x4D)     //0x42 = 'B' && 0x4D = 'M'
+    if ((bitmapFileHeader->bfType1) != 0x42 || (bitmapFileHeader->bfType2) != 0x4D)     //0x42 = 'B' && 0x4D = 'M'
     {
         fclose(filePtr);
         return NULL;
@@ -48,7 +46,7 @@ unsigned char *LoadBitmapFile(char *filename, BITMAPFILEHEADER *bitmapFileHeader
     }
 
     //read in the bitmap image data
-    fread(bitmapImage,bitmapInfoHeader->biSizeImage,1, filePtr);
+    fread(bitmapImage, bitmapInfoHeader->biSizeImage, 1, filePtr);
 
     //make sure bitmap image data was read
     if (bitmapImage == NULL) {
@@ -69,16 +67,16 @@ unsigned char *LoadBitmapFile(char *filename, BITMAPFILEHEADER *bitmapFileHeader
     return bitmapImage;
 }
 
-void function1(BITMAPFILEHEADER bitmapFileHeader,BITMAPINFOHEADER bitmapInfoHeader){
+void imageInfo(BITMAPFILEHEADER bitmapFileHeader, BITMAPINFOHEADER bitmapInfoHeader) {
 
     printf("BITMAP_FILE_HEADER\n");
     printf("==================\n");
 
-    printf("bfType: %c%c\n",bitmapFileHeader.bfType1,bitmapFileHeader.bfType2);
-    printf("bfSize: %d\n",bitmapFileHeader.bfSize);
-    printf("bfReserved1: %d\n",bitmapFileHeader.bfReserved1);
-    printf("bfReserved2: %d\n",bitmapFileHeader.bfReserved2);
-    printf("bfOffBits: %lu\n\n",bitmapFileHeader.bfOffBits);
+    printf("bfType: %c%c\n", bitmapFileHeader.bfType1, bitmapFileHeader.bfType2);
+    printf("bfSize: %d\n", bitmapFileHeader.bfSize);
+    printf("bfReserved1: %d\n", bitmapFileHeader.bfReserved1);
+    printf("bfReserved2: %d\n", bitmapFileHeader.bfReserved2);
+    printf("bfOffBits: %lu\n\n", bitmapFileHeader.bfOffBits);
 
     printf("BITMAP_INFO_HEADER\n");
     printf("==================\n");
@@ -97,7 +95,8 @@ void function1(BITMAPFILEHEADER bitmapFileHeader,BITMAPINFOHEADER bitmapInfoHead
 
 }
 
-
+//Driver function
+#ifdef bmpDEBUG
 int main() {
 
     BITMAPFILEHEADER b1;
@@ -113,15 +112,15 @@ int main() {
     BITMAPFILEHEADER bitmapFileHeader;
 
     unsigned char *bitmapData;
-    bitmapData = LoadBitmapFile("image2.bmp", &bitmapFileHeader, &bitmapInfoHeader);
+    bitmapData = LoadBitmapFile("image6.bmp", &bitmapFileHeader, &bitmapInfoHeader);
 
 //#ifdef list
-    function1(bitmapFileHeader,bitmapInfoHeader);
+    imageInfo(bitmapFileHeader, bitmapInfoHeader);
 //#endif
 
     FILE *filePtr;
 
-    filePtr = fopen("image2new.bmp", "wb");
+    filePtr = fopen("newImage.bmp", "wb");
 
     if (filePtr == NULL) {
         printf("Can't write on file");
@@ -138,5 +137,6 @@ int main() {
     return 0;
 
 }
+#endif
 
 
