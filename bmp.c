@@ -120,7 +120,20 @@ int main() {
     function1(bitmapFileHeader,bitmapInfoHeader);
 //#endif
 
-    printf("%s",bitmapData);
+    FILE *filePtr;
+
+    filePtr = fopen("image2new.bmp", "wb");
+
+    if (filePtr == NULL)
+        return NULL;
+
+    BITMAPFILEHEADER *ptr1 = &bitmapFileHeader;
+    BITMAPINFOHEADER *ptr2 = &bitmapInfoHeader;
+
+    fwrite(ptr1, sizeof(BITMAPFILEHEADER), 1, filePtr);
+    fwrite(ptr2, sizeof(BITMAPINFOHEADER), 1, filePtr);
+    fwrite(bitmapData, sizeof(bitmapInfoHeader.biSizeImage), 1, filePtr);
+
 
     return 0;
 
