@@ -98,11 +98,11 @@ PIXEL *getEachPixel(unsigned char *bitmapData, BITMAPINFOHEADER *bitmapInfoHeade
 
     for (int i = 0; i < ((bitmapInfoHeader->biSizeImage) / 3); i++) {    // for each pixel
 
-        (pixels + i)->blue = *(bitmapData);
+        (pixels + i)->red = *(bitmapData);
         bitmapData++;
         (pixels + i)->green = *(bitmapData);
         bitmapData++;
-        (pixels + i)->red = *(bitmapData);
+        (pixels + i)->blue = *(bitmapData);
         bitmapData++;
 
         if (padding == true) {
@@ -110,9 +110,9 @@ PIXEL *getEachPixel(unsigned char *bitmapData, BITMAPINFOHEADER *bitmapInfoHeade
                 linecounter = bitmapInfoHeader->biWidth + numOfEachLinePadding;
 
             if (linecounter <= numOfEachLinePadding) {
-                (pixels + i)->isPadding = true;
+              //  (pixels + i)->isPadding = '1';
             } else {
-                (pixels + i)->isPadding = false;
+              //  (pixels + i)->isPadding = '0';
             }
 
             //Retracting 3 because we are dealing with pixels
