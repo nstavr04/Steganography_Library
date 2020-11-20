@@ -48,10 +48,6 @@ int main(int argc, char *argv[]) {
 
              makePictureGrayScaled(pixels, &bitmapFileHeader, &bitmapInfoHeader, fp);
 
-
-            if (bitmapData != NULL) {  // If bitmapData == null, it means that the file given is not valid, or there is no memory to allocate
-                // here
-            }
             counter++;
         }
         free(pixels);

@@ -4,9 +4,6 @@
 
 #include "bmp.h"
 
-
-//unsigned int ReadLE4(FILE *fp);
-
 unsigned char *LoadBitmapFile(char *filename, BITMAPFILEHEADER *bitmapFileHeader, BITMAPINFOHEADER *bitmapInfoHeader) {
     FILE *filePtr; //our file pointer
     //BITMAPFILEHEADER bitmapFileHeader; //our bitmap file header
@@ -91,9 +88,6 @@ PIXEL *getEachPixel(unsigned char *bitmapData, BITMAPINFOHEADER *bitmapInfoHeade
         exit(-1);
     }
 
-//    int lineCounter = 0;
-//    int tempNumOfEachLinePadding = numOfEachLinePadding;
-
     int linecounter = bitmapInfoHeader->biWidth + numOfEachLinePadding;
 
     for (int i = 0; i < ((bitmapInfoHeader->biSizeImage) / 3); i++) {    // for each pixel
@@ -110,9 +104,9 @@ PIXEL *getEachPixel(unsigned char *bitmapData, BITMAPINFOHEADER *bitmapInfoHeade
                 linecounter = bitmapInfoHeader->biWidth + numOfEachLinePadding;
 
             if (linecounter <= numOfEachLinePadding) {
-              //  (pixels + i)->isPadding = '1';
+                (pixels + i)->isPadding = '1';
             } else {
-              //  (pixels + i)->isPadding = '0';
+                (pixels + i)->isPadding = '0';
             }
 
             //Retracting 3 because we are dealing with pixels
@@ -130,8 +124,7 @@ PIXEL *getEachPixel(unsigned char *bitmapData, BITMAPINFOHEADER *bitmapInfoHeade
 //        }else{
 //            (pixels + i)->isPadding = false;
 //        }
-
-       // lineCounter++;
+// lineCounter++;
 
 
     }
