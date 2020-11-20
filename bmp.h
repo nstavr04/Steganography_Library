@@ -44,8 +44,8 @@ typedef struct pixel{
     unsigned char    red;    /* 1 byte  */
     unsigned char   green;   /* 1 byte  */
     unsigned char    blue;   /* 1 byte  */
-    bool isPadding;
-}PIXEL;
+//    bool isPadding;
+}__attribute__((packed))PIXEL;
 
 unsigned char *LoadBitmapFile(char *filename, BITMAPFILEHEADER *bitmapFileHeader, BITMAPINFOHEADER *bitmapInfoHeader);
 

@@ -25,6 +25,7 @@ int main(int argc, char *argv[]) {
         int counter = 2;  // program argument 1 Is the operations. (-list)
         while (counter < argc) {
             bitmapData = LoadBitmapFile(argv[counter], &bitmapFileHeader, &bitmapInfoHeader);
+
             if (bitmapData != NULL) {  // If bitmapData == null, it means that the file given is not valid, or there is no memory to allocate
                 imageInfo(bitmapFileHeader, bitmapInfoHeader);
                 if (counter != (argc - 1)) {
@@ -35,17 +36,18 @@ int main(int argc, char *argv[]) {
         }
     } else if (strcmp(argv[1], "-grayscale") == 0) {    //Operation 2
         PIXEL *pixels;
-        int counter = 2;  // program argument 1 Is the operations. (-list)
+        int counter = 2;  // program argument 1 Is the operations. (-grayscale)
         while (counter < argc) {
+
+
             bitmapData = LoadBitmapFile(argv[counter], &bitmapFileHeader, &bitmapInfoHeader);
+
+            FILE *fp = fopen(argv[counter], "wb");
 
              pixels = getEachPixel(bitmapData, &bitmapInfoHeader);
 
-             makePictureGrayScaled(pixels, &bitmapFileHeader,&bitmapInfoHeader);
+             makePictureGrayScaled(pixels, &bitmapFileHeader, &bitmapInfoHeader, fp);
 
-//            printf("%d\n", pixels[1].red);
-//            printf("%d\n", pixels[1].green);
-//            printf("%d\n", pixels[1].blue);
 
             if (bitmapData != NULL) {  // If bitmapData == null, it means that the file given is not valid, or there is no memory to allocate
                 // here

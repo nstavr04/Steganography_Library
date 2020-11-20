@@ -76,10 +76,12 @@ unsigned char *LoadBitmapFile(char *filename, BITMAPFILEHEADER *bitmapFileHeader
  */
 PIXEL *getEachPixel(unsigned char *bitmapData, BITMAPINFOHEADER *bitmapInfoHeader) {
 
+    int numOfEachLinePadding;
     //check if there is padding
     bool padding = false;
     if ((bitmapInfoHeader->biWidth)*3%4 != 0){
         padding = true;
+        numOfEachLinePadding = (bitmapInfoHeader->biWidth)*3%4;
     }
 
     printf("size of PIXEL: %llu\n", sizeof(PIXEL));
@@ -89,10 +91,49 @@ PIXEL *getEachPixel(unsigned char *bitmapData, BITMAPINFOHEADER *bitmapInfoHeade
         exit(-1);
     }
 
+//    int lineCounter = 0;
+//    int tempNumOfEachLinePadding = numOfEachLinePadding;
+
+    int linecounter = bitmapInfoHeader->biWidth + numOfEachLinePadding;
+
     for (int i = 0; i < ((bitmapInfoHeader->biSizeImage) / 3); i++) {    // for each pixel
-        (pixels + i)->blue = *(bitmapData++);
-        (pixels + i)->green = *(bitmapData++);
-        (pixels + i)->red = *(bitmapData++);
+
+        (pixels + i)->blue = *(bitmapData);
+        bitmapData++;
+        (pixels + i)->green = *(bitmapData);
+        bitmapData++;
+        (pixels + i)->red = *(bitmapData);
+        bitmapData++;
+
+        if (padding == true) {
+            if (linecounter == 0)
+                linecounter = bitmapInfoHeader->biWidth + numOfEachLinePadding;
+
+            if (linecounter <= numOfEachLinePadding) {
+//                (pixels + i)->isPadding = true;
+            } else {
+//                (pixels + i)->isPadding = false;
+            }
+
+            //Retracting 3 because we are dealing with pixels
+            linecounter--;
+        }
+
+
+//        if (lineCounter == bitmapInfoHeader->biWidth){
+//            (pixels + i)->isPadding = true;
+//            tempNumOfEachLinePadding--;
+//            if (tempNumOfEachLinePadding == 0){
+//                tempNumOfEachLinePadding = numOfEachLinePadding;
+//                lineCounter = 0;
+//            }
+//        }else{
+//            (pixels + i)->isPadding = false;
+//        }
+
+       // lineCounter++;
+
+
     }
     return pixels;
 }
