@@ -110,9 +110,9 @@ PIXEL *getEachPixel(unsigned char *bitmapData, BITMAPINFOHEADER *bitmapInfoHeade
                 linecounter = bitmapInfoHeader->biWidth + numOfEachLinePadding;
 
             if (linecounter <= numOfEachLinePadding) {
-//                (pixels + i)->isPadding = true;
+                (pixels + i)->isPadding = true;
             } else {
-//                (pixels + i)->isPadding = false;
+                (pixels + i)->isPadding = false;
             }
 
             //Retracting 3 because we are dealing with pixels

@@ -25,16 +25,16 @@ void setNewLuminance(PIXEL pixel){
 void makePictureGrayScaled(PIXEL *pixels, BITMAPFILEHEADER *bitmapFileHeader, BITMAPINFOHEADER *bitmapInfoHeader, FILE *fp){
 
     for (int i = 0; i < ((bitmapInfoHeader->biSizeImage)/3); i++) {    // for each pixel
-//        if (pixels[i].isPadding == false) {
-//            setNewLuminance(pixels[i]);
-//        }
+
         unsigned char newLuminance;
+        if (pixels[i].isPadding == false) {
+            newLuminance = (unsigned char) (round(
+                    pixels[i].red * 0.299 + pixels[i].green * 0.587 + pixels[i].blue * 0.114));
 
-        newLuminance = (unsigned char)(round(pixels[i].red*0.299 + pixels[i].green*0.587 + pixels[i].blue*0.114));
-
-        pixels[i].red = newLuminance;
-        pixels[i].blue = newLuminance;
-        pixels[i].green = newLuminance;
+            pixels[i].red = newLuminance;
+            pixels[i].blue = newLuminance;
+            pixels[i].green = newLuminance;
+        }
     }
 
 
