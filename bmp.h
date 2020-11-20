@@ -8,7 +8,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-
+#include <stdbool.h>
 
 /**
  * Bitmap file header
@@ -40,9 +40,18 @@ typedef struct tagBITMAPINFOHEADER {    /*  40 bytes  */
     unsigned long  biClrImportant;  /* 4 bytes */   // Specifies the number of color that are 'important' for the bitmap, if set to zero, all colors are important.
 } BITMAPINFOHEADER;
 
+typedef struct pixel{
+    unsigned char    red;    /* 1 byte  */
+    unsigned char   green;   /* 1 byte  */
+    unsigned char    blue;   /* 1 byte  */
+    bool isPadding;
+}PIXEL;
+
 unsigned char *LoadBitmapFile(char *filename, BITMAPFILEHEADER *bitmapFileHeader, BITMAPINFOHEADER *bitmapInfoHeader);
 
 void imageInfo(BITMAPFILEHEADER bitmapFileHeader, BITMAPINFOHEADER bitmapInfoHeader);
+
+PIXEL *getEachPixel(unsigned char *bitmapData, BITMAPINFOHEADER *bitmapInfoHeader);
 
 
 //BITMAPFILEHEADER *ReadBMFileHeader(FILE *fp);

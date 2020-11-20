@@ -67,6 +67,36 @@ unsigned char *LoadBitmapFile(char *filename, BITMAPFILEHEADER *bitmapFileHeader
     return bitmapImage;
 }
 
+/** @brief This method splits each pixel from bimapData
+ *
+ *
+ * @param bitmapData
+ * @param bitmapInfoHeader
+ * @return
+ */
+PIXEL *getEachPixel(unsigned char *bitmapData, BITMAPINFOHEADER *bitmapInfoHeader) {
+
+    //check if there is padding
+    bool padding = false;
+    if ((bitmapInfoHeader->biWidth)*3%4 != 0){
+        padding = true;
+    }
+
+    printf("size of PIXEL: %llu\n", sizeof(PIXEL));
+    PIXEL *pixels = malloc(sizeof(PIXEL) * ((bitmapInfoHeader->biSizeImage)/3));    //each pixel is 3 bytes
+    if (!pixels){
+        printf("Unable to allocate memory");
+        exit(-1);
+    }
+
+    for (int i = 0; i < ((bitmapInfoHeader->biSizeImage) / 3); i++) {    // for each pixel
+        (pixels + i)->blue = *(bitmapData++);
+        (pixels + i)->green = *(bitmapData++);
+        (pixels + i)->red = *(bitmapData++);
+    }
+    return pixels;
+}
+
 //Driver function
 #ifdef bmpDEBUG
 int main() {
