@@ -6,6 +6,10 @@
 #include "bmplib.h"
 #include <math.h>
 
+/** @brief This method is used at each pixel, to find and set the new grayscaled rgb value
+ *
+ * @param pixel
+ */
 void setNewLuminance(PIXEL *pixel){
     unsigned char newLuminance;
 
@@ -15,6 +19,8 @@ void setNewLuminance(PIXEL *pixel){
     pixel->blue = newLuminance;
     pixel->green = newLuminance;
 }
+
+
 
 void makePictureGrayScaled(PIXEL *pixels, BITMAPFILEHEADER *bitmapFileHeader, BITMAPINFOHEADER *bitmapInfoHeader, FILE *fp){
 

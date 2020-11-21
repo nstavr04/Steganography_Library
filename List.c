@@ -5,6 +5,7 @@
 #include "bmp.h"
 #include "bmplib.h"
 
+
 void imageInfo(BITMAPFILEHEADER bitmapFileHeader, BITMAPINFOHEADER bitmapInfoHeader) {
 
     printf("BITMAP_FILE_HEADER\n");

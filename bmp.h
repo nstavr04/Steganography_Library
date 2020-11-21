@@ -40,6 +40,9 @@ typedef struct tagBITMAPINFOHEADER {    /*  40 bytes  */
     unsigned long  biClrImportant;  /* 4 bytes */   // Specifies the number of color that are 'important' for the bitmap, if set to zero, all colors are important.
 } BITMAPINFOHEADER;
 
+/**
+ * Bitmap pixel. (isPadding byte is just to make sure that this is a pixel or a padding)
+ */
 typedef struct pixel{
     unsigned char    red;    /* 1 byte  */
     unsigned char   green;   /* 1 byte  */
