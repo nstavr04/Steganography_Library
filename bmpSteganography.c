@@ -16,6 +16,13 @@ int main(int argc, char *argv[]) {
 
     unsigned char *bitmapData;
 
+    BITMAPINFOHEADER secretInfoHeader;
+
+    BITMAPFILEHEADER  secretFileHeader;
+
+    //Used in encodeImage
+    unsigned char *secretImage;
+
 
     if (argc < 3) {
         return 0;
@@ -35,6 +42,7 @@ int main(int argc, char *argv[]) {
             counter++;
         }
     } else if (strcmp(argv[1], "-grayscale") == 0) {    //Operation 2
+
         PIXEL *pixels;
         int counter = 2;  // program argument 1 Is the operations. (-grayscale)
         while (counter < argc) {
@@ -49,10 +57,53 @@ int main(int argc, char *argv[]) {
              makePictureGrayScaled(pixels, &bitmapFileHeader, &bitmapInfoHeader, fp);
 
             counter++;
+
+            fclose(fp);
         }
         free(pixels);
-    } else if (strcmp(argv[1], "-encodeStegano") == 0) {
-        //Operation 3
+    } else if (strcmp(argv[1], "-encodeStegano") == 0) { //Operation 3
+
+        PIXEL *pixels;
+
+        PIXEL *imagePixels;
+
+        //Checking if nbBits are correct
+        if(strcmp(argv[2] , "1") != 0 && strcmp(argv[2] , "2") != 0 && strcmp(argv[2] , "3") != 0 && strcmp(argv[2] , "4") != 0){
+            printf("Wrong nbBits input. nbBits should be 1-4");
+            exit(-1);
+        }
+
+            //Save the data of the first image in bitmapData
+            bitmapData = LoadBitmapFile(argv[3], &bitmapFileHeader, &bitmapInfoHeader);
+
+            //Save the data of the secret Image
+            secretImage = LoadBitmapFile(argv[4], &secretFileHeader, &secretInfoHeader);
+
+            //Checking that the images have the same dimentions
+            if(bitmapInfoHeader.biWidth != secretInfoHeader.biWidth && bitmapInfoHeader.biHeight != secretInfoHeader.biHeight){
+                printf("Images need to have the same dimentions");
+                exit(-1);
+            }
+
+            //The file to save the Image to new-
+            //5 Bytes because we need the \0 too
+            char* newFile = malloc(strlen(argv[3]) + 5);
+            strcpy(newFile,"new-");
+            strcat(newFile, argv[3]);
+
+            FILE *fp = fopen(newFile, "wb");
+
+            pixels = getEachPixel(bitmapData, &bitmapInfoHeader);
+
+            imagePixels = getEachPixel(secretImage,&secretInfoHeader);
+
+            encodeStegano(imagePixels,pixels, &bitmapFileHeader, &bitmapInfoHeader, fp,argv[2]);
+
+        free(pixels);
+        free(imagePixels);
+
+        fclose(fp);
+
     } else if (strcmp(argv[1], "-decodeStegano") == 0) {
         // Operation 4
     } else if (strcmp(argv[1], "-encodeText") == 0) {
