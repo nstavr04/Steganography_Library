@@ -4,6 +4,13 @@
 
 #include "bmp.h"
 
+/** @brief This function reads and loads the bitmap file
+ *
+ * @param filename
+ * @param bitmapFileHeader
+ * @param bitmapInfoHeader
+ * @return
+ */
 unsigned char *LoadBitmapFile(char *filename, BITMAPFILEHEADER *bitmapFileHeader, BITMAPINFOHEADER *bitmapInfoHeader) {
     FILE *filePtr; //our file pointer
     //BITMAPFILEHEADER bitmapFileHeader; //our bitmap file header
@@ -112,20 +119,6 @@ PIXEL *getEachPixel(unsigned char *bitmapData, BITMAPINFOHEADER *bitmapInfoHeade
             //Retracting 3 because we are dealing with pixels
             linecounter--;
         }
-
-
-//        if (lineCounter == bitmapInfoHeader->biWidth){
-//            (pixels + i)->isPadding = true;
-//            tempNumOfEachLinePadding--;
-//            if (tempNumOfEachLinePadding == 0){
-//                tempNumOfEachLinePadding = numOfEachLinePadding;
-//                lineCounter = 0;
-//            }
-//        }else{
-//            (pixels + i)->isPadding = false;
-//        }
-// lineCounter++;
-
 
     }
     return pixels;
