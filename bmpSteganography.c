@@ -101,11 +101,40 @@ int main(int argc, char *argv[]) {
 
         free(pixels);
         free(imagePixels);
+        free(newFile);
 
         fclose(fp);
 
-    } else if (strcmp(argv[1], "-decodeStegano") == 0) {
-        // Operation 4
+    } else if (strcmp(argv[1], "-decodeStegano") == 0) { // Operation 4
+
+        PIXEL *pixels;
+
+        //Checking if nbBits are correct
+        if(strcmp(argv[2] , "1") != 0 && strcmp(argv[2] , "2") != 0 && strcmp(argv[2] , "3") != 0 && strcmp(argv[2] , "4") != 0){
+            printf("Wrong nbBits input. nbBits should be 1-4");
+            exit(-1);
+        }
+
+        //Save the data of the first image in bitmapData
+        bitmapData = LoadBitmapFile(argv[3], &bitmapFileHeader, &bitmapInfoHeader);
+
+        //The file to save the Image to new-
+        //5 Bytes because we need the \0 too
+        char* newFile = malloc(strlen(argv[3]) + 5);
+        strcpy(newFile,"new-");
+        strcat(newFile, argv[3]);
+
+        FILE *fp = fopen(newFile, "wb");
+
+        pixels = getEachPixel(bitmapData, &bitmapInfoHeader);
+
+        decodeStegano(pixels, &bitmapFileHeader, &bitmapInfoHeader, fp,argv[2]);
+
+        free(pixels);
+        free(newFile);
+
+        fclose(fp);
+
     } else if (strcmp(argv[1], "-encodeText") == 0) {
         // Operation 5
     } else if (strcmp(argv[1], "-decodeText") == 0) {
