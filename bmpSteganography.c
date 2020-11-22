@@ -135,12 +135,79 @@ int main(int argc, char *argv[]) {
 
         fclose(fp);
 
-    } else if (strcmp(argv[1], "-encodeText") == 0) {
-        // Operation 5
+    } else if (strcmp(argv[1], "-encodeText") == 0) {   // Operation 5
+        //The file to save the Image to new-
+        //5 Bytes because we need the \0 too
+        char* newFileName = malloc(strlen(argv[2]) + 5);
+        strcpy(newFileName,"new-");
+        strcat(newFileName, argv[2]);
+        printf("newfile: %s\n", newFileName);
+
+        // Open the new file (create it)
+        FILE *newFile = NULL;
+        newFile = fopen(newFileName, "wb");
+        if (newFile == NULL) {
+            printf("unable to open");
+            exit(-1);
+        }
+
+        // Open the file that contains the text that needs to be encrypted
+        FILE *fileText = NULL;
+        fileText = fopen(argv[3], "r");
+        if (fileText == NULL) {
+            printf("unable to open");
+            exit(-1);
+        }
+
+        char *encodedText;  //text that needs to be encoded
+
+        bitmapData = LoadBitmapFile(argv[2], &bitmapFileHeader, &bitmapInfoHeader);
+
+        fwrite(&bitmapFileHeader, sizeof(BITMAPFILEHEADER), 1, newFile);    // Write BITMAPFILEHEADER to the new file
+        fwrite(&bitmapInfoHeader, sizeof(BITMAPINFOHEADER), 1, newFile);    // Write BITMAPINFOHEADER to the new file
+
+        encodedText = inputString(fileText, 1, 1);  // Read the text from file
+
+
+        printf("%s", encodedText);  // Print it just to be sure
+
+    fclose(fileText);
+    fclose(newFile);
+
     } else if (strcmp(argv[1], "-decodeText") == 0) {
         //Operation 6
-    } else if (strcmp(argv[1], "-stringToImage") == 0) {
-        //Operation 7
+    } else if (strcmp(argv[1], "-stringToImage") == 0) {    //Operation 7
+        //The file to save the Image to new-
+        //5 Bytes because we need the \0 too
+        char* newFileName = malloc(strlen(argv[2]) + 5);
+        strcpy(newFileName,"new-");
+        strcat(newFileName, argv[2]);
+        printf("newfile: %s\n", newFileName);
+
+        // Open the new file (create it)
+        FILE *newFile = NULL;
+        newFile = fopen(newFileName, "wb");
+        if (newFile == NULL) {
+            printf("unable to open");
+            exit(-1);
+        }
+
+        // Open the file that contains the text that needs to be encrypted
+        FILE *fileText = NULL;
+        fileText = fopen(argv[3], "r");
+        if (fileText == NULL) {
+            printf("unable to open");
+            exit(-1);
+        }
+
+        bitmapData = LoadBitmapFile(argv[2], &bitmapFileHeader, &bitmapInfoHeader);
+
+        fwrite(&bitmapFileHeader, sizeof(BITMAPFILEHEADER), 1, newFile);    // Write BITMAPFILEHEADER to the new file
+        fwrite(&bitmapInfoHeader, sizeof(BITMAPINFOHEADER), 1, newFile);    // Write BITMAPINFOHEADER to the new file
+
+
+
+
     } else if (strcmp(argv[1], "-imageToString") == 0) {
         //Operation 8
     }

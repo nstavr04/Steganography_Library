@@ -28,4 +28,18 @@ void encodeStegano(PIXEL *imagePixels,PIXEL *pixels, BITMAPFILEHEADER *bitmapFil
 
 void decodeStegano(PIXEL *pixels, BITMAPFILEHEADER *SecretFileHeader, BITMAPINFOHEADER *SecretInfoHeader, FILE *fp,char *nbBits);
 
+/** @brief This function reads the file *fp.
+ *
+ * It reads until the end or until the first '\n'. It depends on the
+ * flag. If the flag is 0 it reads untill the first '/n'
+ * Else it reads the file as a whole string. It mallocs
+ * the suitable memory.
+ *
+ * @param fp
+ * @param size
+ * @param flag
+ * @return the string
+ */
+char *inputString(FILE *fp, size_t size, int flag);
+
 #endif //HW4_BMPLIB_H
