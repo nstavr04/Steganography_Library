@@ -42,4 +42,6 @@ void decodeStegano(PIXEL *pixels, BITMAPFILEHEADER *SecretFileHeader, BITMAPINFO
  */
 char *inputString(FILE *fp, size_t size, int flag);
 
+int getBit(char *m, int n);
+
 #endif //HW4_BMPLIB_H

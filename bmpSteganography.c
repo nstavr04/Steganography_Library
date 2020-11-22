@@ -141,6 +141,7 @@ int main(int argc, char *argv[]) {
         char* newFileName = malloc(strlen(argv[2]) + 5);
         strcpy(newFileName,"new-");
         strcat(newFileName, argv[2]);
+
         printf("newfile: %s\n", newFileName);
 
         // Open the new file (create it)
@@ -167,6 +168,27 @@ int main(int argc, char *argv[]) {
         fwrite(&bitmapInfoHeader, sizeof(BITMAPINFOHEADER), 1, newFile);    // Write BITMAPINFOHEADER to the new file
 
         encodedText = inputString(fileText, 1, 1);  // Read the text from file
+
+//        char *text = "Big rumble in New Guinea.";
+//
+//        char *test = NULL;
+//
+//        test = malloc(sizeof(char)*26);
+//
+//        for(int i=0;i<=25;i++){
+//            if(getBit(text,i) == 1){
+//                test[i] = '1' ;
+//            }
+//            else{
+//                test[i] = '0';
+//            }
+//
+//        }
+//
+//        test[24] = '\0';
+//
+//        printf("%s",test);
+
 
 
         printf("%s", encodedText);  // Print it just to be sure
@@ -210,6 +232,10 @@ int main(int argc, char *argv[]) {
 
     } else if (strcmp(argv[1], "-imageToString") == 0) {
         //Operation 8
+    }
+    else{
+        printf("Wrong -option input");
+        exit(-1);
     }
 
 

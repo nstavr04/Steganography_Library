@@ -47,7 +47,7 @@ int *createPermutationFunction(int N, unsigned int systemkey){
 
 int getBit(char *m, int n) {
     if (n <= 8 * strlen(m))
-        return (*(m + n / 8) & (7 - (n % 8)));
+        return ((*(m + n / 8) >> (7 - (n % 8))) & 1);
     else
         return 0;
 }
