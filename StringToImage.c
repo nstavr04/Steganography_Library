@@ -1,8 +1,6 @@
 /**
 * @file StringToImage.c
-* @brief The class that implements the GrayScale function.
-*
-* This class takes an images and creates the grayscaled version of the image
+* @brief The class that hides the a text file into an image.
 *
 * @author nstavr04
 * @bug No known bugs.
@@ -27,8 +25,6 @@ void StringToImage(unsigned char *bitmapData, BITMAPFILEHEADER *bitmapFileHeader
     }
 
     char *array;
-
-
 
     //Used to save the text file into an array
     array = inputString(fileText, length, 1);
@@ -56,23 +52,15 @@ void StringToImage(unsigned char *bitmapData, BITMAPFILEHEADER *bitmapFileHeader
 //        }
 //    }
 
-    int j=0;
-    int k=0;
-
     //Working but not the way we want to put them from top right
     for (int i = 0; i < bitmapInfoHeader->biSizeImage; i += 3) {
 
-        k=i%bitmapInfoHeader->biWidth;
-
-        //0,1,2
-        if(i%bitmapInfoHeader->biHeight <= 2)
-            j++;
-
-        *(bitmapData + i) = 128 * getBit(array, bitmapInfoHeader->biHeight*k + j);
-        *(bitmapData + i + 1) = 128 * getBit(array, bitmapInfoHeader->biHeight*k + j);
-        *(bitmapData + i + 2) = 128 * getBit(array, bitmapInfoHeader->biHeight*k + j);
+        *(bitmapData + i) = 128 * getBit(array, i/3);
+        *(bitmapData + i + 1) = 128 * getBit(array, i/3);
+        *(bitmapData + i + 2) = 128 * getBit(array, i/3);
     }
 
+    fwrite(bitmapData, bitmapInfoHeader->biSizeImage, 1, newFile);
 
 
 
@@ -111,7 +99,6 @@ void StringToImage(unsigned char *bitmapData, BITMAPFILEHEADER *bitmapFileHeader
 //    }
 
 
-    fwrite(bitmapData, bitmapInfoHeader->biSizeImage, 1, newFile);
 
 //    public void rotateRight() {
 //        Color[][] copy = shapeCopy();

@@ -66,19 +66,6 @@ void decodeStegano(PIXEL *pixels, BITMAPFILEHEADER *SecretFileHeader, BITMAPINFO
 char *inputString(FILE *fp, size_t size, int flag);
 
 /**
- * @brief This function reads a text file and encodes it into an image creating a black and grey image.
- *
- * If the text file is larger than the size of the image we will ignore the characters when the image is full.
- * If the text file is smaller than the size of the image, the remaining pixels will be black
- *
- * @param bitmapData a pointer to our picture data
- * @param bitmapFileHeader the bitmap file header
- * @param bitmapInfoHeader the bitmap info header
- * @param newFile the file pointer to the new image that we will create
- */
-void StringToImage(unsigned char *bitmapData, BITMAPFILEHEADER *bitmapFileHeader, BITMAPINFOHEADER  *bitmapInfoHeader, FILE *newFile,char *arg,int length);
-
-/**
  * @brief get n bit content from message m
  *
  * @param m pointer to the message
@@ -98,5 +85,21 @@ int getBit(char *m, int n);
 void stegaEncryptEncodeText(char *textToBeEncoded, unsigned char *bitmapData, BITMAPINFOHEADER *bitmapInfoHeader, FILE *newFile);
 
 void stegaEncryptDecodeText(unsigned char *bitmapData, int length, FILE *outputFile);
+
+/**
+ * @brief This function reads a text file and encodes it into an image creating a black and grey image.
+ *
+ * If the text file is larger than the size of the image we will ignore the characters when the image is full.
+ * If the text file is smaller than the size of the image, the remaining pixels will be black
+ *
+ * @param bitmapData a pointer to our picture data
+ * @param bitmapFileHeader the bitmap file header
+ * @param bitmapInfoHeader the bitmap info header
+ * @param newFile the file pointer to the new image that we will create
+ */
+void StringToImage(unsigned char *bitmapData, BITMAPFILEHEADER *bitmapFileHeader, BITMAPINFOHEADER  *bitmapInfoHeader, FILE *newFile,char *arg,int length);
+
+
+void ImageToString(unsigned char *bitmapData, BITMAPFILEHEADER *bitmapFileHeader, BITMAPINFOHEADER *bitmapInfoHeader);
 
 #endif //HW4_BMPLIB_H

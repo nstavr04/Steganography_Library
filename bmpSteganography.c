@@ -258,8 +258,13 @@ int main(int argc, char *argv[]) {
         StringToImage(bitmapData, &bitmapFileHeader, &bitmapInfoHeader,newFile,argv[3],cnt);
 
 
-    } else if (strcmp(argv[1], "-imageToString") == 0) {
-        //Operation 8
+    } else if (strcmp(argv[1], "-imageToString") == 0) { //Operation 8
+
+        //Save the data of the image in bitmapData
+        bitmapData = LoadBitmapFile(argv[2], &bitmapFileHeader, &bitmapInfoHeader);
+
+        ImageToString(bitmapData,&bitmapFileHeader,&bitmapInfoHeader);
+
     }
     else{
         printf("Wrong -option input");
