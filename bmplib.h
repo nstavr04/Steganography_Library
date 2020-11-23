@@ -95,6 +95,8 @@ int getBit(char *m, int n);
  * @param bitmapInfoHeader
  * @param newFile
  */
-void stega_encrypt(char *textToBeEncoded, unsigned char *bitmapData, BITMAPINFOHEADER *bitmapInfoHeader, FILE *newFile);
+void stegaEncryptEncodeText(char *textToBeEncoded, unsigned char *bitmapData, BITMAPINFOHEADER *bitmapInfoHeader, FILE *newFile);
+
+stegaEncryptDecodeText(unsigned char *bitmapData, int length, FILE *outputFile);
 
 #endif //HW4_BMPLIB_H

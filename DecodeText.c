@@ -4,3 +4,7 @@
 
 #include "bmp.h"
 #include "bmplib.h"
+
+//stegaEncryptDecodeText(unsigned char *bitmapData, int length, FILE *outputFile){
+//
+//}
