@@ -51,22 +51,9 @@ int *createPermutationFunction(int N, unsigned int systemkey) {
     }
 
     for (int k = 0; k < N; k++) {
-//        int i = rand() % N;
-//        int j = rand() & N;
         *(permutation + k) = k;
     }
 
-//    for (int k = 0; k < (strlen(textToBeEncoded))*8; k++) {
-//        int i = rand() % (strlen(textToBeEncoded))*8;
-//        int j = rand() % (strlen(textToBeEncoded))*8;
-//
-//        int temp;
-//
-//        temp = *(fn + i);
-//        *(fn + i) = *(fn + j);
-//        *(fn + j) = temp;
-//
-//    }
     for (int k = 0; k < N; k++) {
         int i = rand() % N;
         int j = rand() % N;
@@ -80,7 +67,6 @@ int *createPermutationFunction(int N, unsigned int systemkey) {
     }
 
     return permutation;
-
 }
 
 int getBit(char *m,int n){
@@ -95,65 +81,60 @@ int getBit(char *m,int n){
 }
 
 //encription of message
-void stegaEncryptEncodeText(char *textToBeEncoded, unsigned char *bitmapData, BITMAPINFOHEADER *bitmapInfoHeader, FILE *newFile) {
+void stegaEncryptEncodeText(char *textToBeEncoded, unsigned char *bitmapData, int systemKey, BITMAPINFOHEADER *bitmapInfoHeader, FILE *newFile) {
 
-    char *Un = malloc((strlen(textToBeEncoded)+1) * sizeof(char) * 8);
-    int n = 0;
-
-    while (*(textToBeEncoded+n/8) != '\0') {
-
-        if (getBit(textToBeEncoded, n) == 1) {
-            Un[n] = '1';
-        } else {   //getBit == 0
-            Un[n] = '0';
-        }
-        n++;
-    }
-    //add manually the '\0' character (10 at decimal)
-    Un[n++]='0';
-    Un[n++]='0';
-    Un[n++]='0';
-    Un[n++]='0';
-    Un[n++]='1';
-    Un[n++]='0';
-    Un[n++]='1';
-    Un[n]='0';
+//    char *Un = malloc((strlen(textToBeEncoded)+1) * sizeof(char) * 8);
+//    int n = 0;
+//
+//    while (*(textToBeEncoded+n/8) != '\0') {
+//
+//        if (getBit(textToBeEncoded, n) == 1) {
+//            Un[n] = '1';
+//        } else {   //getBit == 0
+//            Un[n] = '0';
+//        }
+//        n++;
+//    }
+//    //add manually the '\0' character (10 at decimal)
+//    Un[n++]='0';
+//    Un[n++]='0';
+//    Un[n++]='0';
+//    Un[n++]='0';
+//    Un[n++]='1';
+//    Un[n++]='0';
+//    Un[n++]='1';
+//    Un[n]='0';
 
 
     int *fn;
 
-
-    int skey = 69;
-
-    fn = createPermutationFunction((strlen(textToBeEncoded)+1)*8, skey);    // system-key-integer
-
-
+    fn = createPermutationFunction(bitmapInfoHeader->biSizeImage, systemKey);    // system-key-integer
 
     // isagogi minimatos stin ikonoa
 
     for (int i = 0; i < (strlen(textToBeEncoded) + 1) * 8; i++) {
         int b = getBit(textToBeEncoded, i);     // ipologise b = getbit(m,i)
         int o = *(fn + i);                      // ipologise 0 = permuation[i]
-        unsigned char temp;
 
         // diagrafi bit mikroterou varous tou o-ostou byte
         // tou pinaka ton pixel kai
         // antikatastasi tou me tin timi b
 
         if (b == 0) {
-            *(bitmapData + (o / 8)) = (*(bitmapData + (o / 8)) & 0xFE);
-        } else if (b == 1) {
-            *(bitmapData + (o / 8)) = (*(bitmapData + (o / 8)) | b);
+            *(bitmapData + o) = (*(bitmapData + o) & 0xFE);
+        }else if (b == 1) {
+            *(bitmapData + o) = (*(bitmapData + o) | b);
         }else{
             printf("In encodeText -> stega_encrypt, b should be 0 or 1 and its value is: %d\n", b);
         }
 
+//        unsigned char b2 = (bitmapData[o] & 254);
+//        b2=b|b2;
+//        bitmapData[o]=b2;
     }
 
     fwrite(bitmapData, bitmapInfoHeader->biSizeImage, 1, newFile);
 
     free(fn);
-    free(Un);
-
-
+//    free(Un);
 }
