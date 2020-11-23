@@ -82,9 +82,11 @@ int getBit(char *m, int n);
  * @param bitmapInfoHeader
  * @param newFile
  */
-void stegaEncryptEncodeText(char *textToBeEncoded, unsigned char *bitmapData, BITMAPINFOHEADER *bitmapInfoHeader, FILE *newFile);
+void stegaEncryptEncodeText(char *textToBeEncoded, unsigned char *bitmapData, int systemKey, BITMAPINFOHEADER *bitmapInfoHeader, FILE *newFile);
 
-void stegaEncryptDecodeText(unsigned char *bitmapData, int length, FILE *outputFile);
+void stegaEncryptDecodeText(unsigned char *bitmapData, BITMAPINFOHEADER *bitmapInfoHeader, int systemKey, int length, FILE *outputFile);
+
+int *createPermutationFunction(int N, unsigned int systemkey);
 
 /**
  * @brief This function reads a text file and encodes it into an image creating a black and grey image.

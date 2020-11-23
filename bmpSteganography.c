@@ -28,6 +28,9 @@ int main(int argc, char *argv[]) {
 
     BITMAPFILEHEADER  secretFileHeader;
 
+    int systemKey;
+    systemKey = 100;
+
     //Used in encodeImage
     unsigned char *secretImage;
 
@@ -176,32 +179,30 @@ int main(int argc, char *argv[]) {
 
         encodedText = inputString(fileText, 10, 1);  // Read the text from file
 
-        stegaEncryptEncodeText(encodedText, bitmapData, &bitmapInfoHeader,newFile);
+        stegaEncryptEncodeText(encodedText, bitmapData, systemKey, &bitmapInfoHeader,newFile);
 
     fclose(fileText);
     fclose(newFile);
 
     } else if (strcmp(argv[1], "-decodeText") == 0) {   //Operation 6
-        // Open the new file (create it)
-//        if (argc != 5){
-//            printf("You need to enter 5 arguments for that operation.\n e.g. $./bmpSteganography –decodeText encryptedImage.bmp msgLength output.txt");
-//        }
-//
-//        int textSizeInBytes = argv[3];
-//
-//        FILE *outputFile = NULL;
-//        outputFile = fopen(argv[4], "w");
-//        if (outputFile == NULL) {
-//            printf("unable to open");
-//            exit(-1);
-//        }
-//
-//
-//        bitmapData = LoadBitmapFile(argv[2], &bitmapFileHeader, &bitmapInfoHeader);
-//
-//        stegaEncryptDecodeText(bitmapData, textSizeInBytes, outputFile);
+//         Open the new file (create it)
+        if (argc != 5){
+            printf("You need to enter 5 arguments for that operation.\n e.g. $./bmpSteganography –decodeText encryptedImage.bmp msgLength output.txt");
+        }
+
+        int textSizeInBytes = atoi(argv[3]);
+
+        FILE *outputFile = NULL;
+        outputFile = fopen(argv[4], "w");
+        if (outputFile == NULL) {
+            printf("unable to open");
+            exit(-1);
+        }
 
 
+        bitmapData = LoadBitmapFile(argv[2], &bitmapFileHeader, &bitmapInfoHeader);
+
+        stegaEncryptDecodeText(bitmapData, &bitmapInfoHeader, systemKey, textSizeInBytes, outputFile);
 
 
     } else if (strcmp(argv[1], "-stringToImage") == 0) {    //Operation 7
