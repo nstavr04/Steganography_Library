@@ -46,12 +46,12 @@ void StringToImage(unsigned char *bitmapData, BITMAPFILEHEADER *bitmapFileHeader
 //        n+=3;
 //    }
 
-//    for(int i=0;i<bitmapInfoHeader->biHeight;i++){
-//        for(int j=0;j<bitmapInfoHeader->biWidth;j++){
+//    for(int i=0;i<bitmapInfoHeader->biWidth;i++){
+//        for(int j=0;j<bitmapInfoHeader->biHeight;j++){
 //
-//            *(bitmapData + i*j) = 128*getBit(array,bitmapInfoHeader->biHeight*i + j);
-//            *(bitmapData+i*j +1) = 128*getBit(array,bitmapInfoHeader->biHeight*i + j);
-//            *(bitmapData+i*j +2) = 128*getBit(array,bitmapInfoHeader->biHeight*i + j);
+//            *((bitmapData) + (bitmapInfoHeader->biHeight -j -1)*bitmapInfoHeader->biWidth + i) = 128*getBit(array,bitmapInfoHeader->biHeight*i + j);
+//            *((bitmapData) + (bitmapInfoHeader->biHeight -j -1)*bitmapInfoHeader->biWidth + i + 1) = 128*getBit(array,bitmapInfoHeader->biHeight*i + j);
+//            *((bitmapData) + (bitmapInfoHeader->biHeight -j -1)*bitmapInfoHeader->biWidth + i + 2)= 128*getBit(array,bitmapInfoHeader->biHeight*i + j);
 //
 //        }
 //    }
@@ -72,6 +72,9 @@ void StringToImage(unsigned char *bitmapData, BITMAPFILEHEADER *bitmapFileHeader
         *(bitmapData + i + 1) = 128 * getBit(array, bitmapInfoHeader->biHeight*k + j);
         *(bitmapData + i + 2) = 128 * getBit(array, bitmapInfoHeader->biHeight*k + j);
     }
+
+
+
 
 
     //Dynamically declaring a 2d array where we will save in correct order our pixels

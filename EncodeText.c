@@ -83,11 +83,15 @@ int *createPermutationFunction(int N, unsigned int systemkey) {
 
 }
 
-int getBit(char *m, int n) {
-    if (n <= 8 * strlen(m))
-        return (((*(m + n / 8) & (0x1 << (7 - (n % 8)))) >> (7 - (n % 8))));
-    else
-        return 0;
+int getBit(char *m,int n){
+    if(n>=0 && n<=8*strlen(m)){
+        int i = n/8;
+        char ch = m[i];
+        int bitStatus;
+        bitStatus = (ch >> 7 - (n % 8)) & 1;
+        return bitStatus;
+    }
+    return 0;
 }
 
 //encription of message
