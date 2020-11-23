@@ -6,7 +6,6 @@
 #include "bmplib.h"
 
 
-
 char *inputString(FILE *fp, size_t size, int flag) {       //size_t = size of 'object' in bytes
     // flag: if true the function ignores the '\n'
 //The size is extended by the input with the value of the provisional
@@ -28,7 +27,7 @@ char *inputString(FILE *fp, size_t size, int flag) {       //size_t = size of 'o
     } else {
         while (EOF != (ch = fgetc(fp))) {
 //            if (ch != '\n')         // This if ignores the new line characters
-                str[len++] = ch;
+            str[len++] = ch;
             if (len == size) {
                 str = realloc(str, sizeof(char) * (size += 16));
                 if (!str)
@@ -41,7 +40,24 @@ char *inputString(FILE *fp, size_t size, int flag) {       //size_t = size of 'o
     return realloc(str, sizeof(char) * len);
 }
 
-int *createPermutationFunction(int N, unsigned int systemkey){
+int *createPermutationFunction(int N, unsigned int systemkey) {
+
+//    srand(systemkey);
+
+    int *permutation = malloc(sizeof(int) * N);
+    if (!permutation){
+        printf("Not enough memory space to allocate");
+        exit(-1);
+    }
+
+    for (int k = 0; k < N; k++) {
+//        int i = rand() % N;
+//        int j = rand() & N;
+        *(permutation + k) = k;
+
+    }
+
+    return permutation;
 
 }
 
@@ -53,19 +69,70 @@ int getBit(char *m, int n) {
 }
 
 //encription of message
-void stega_encrypt(char *textToBeEncoded)
-{
-    char *Un = malloc(strlen(textToBeEncoded) * sizeof(char) * 8);
+void stega_encrypt(char *textToBeEncoded, unsigned char *bitmapData, BITMAPINFOHEADER *bitmapInfoHeader, FILE *newFile) {
+
+    char *Un = malloc((strlen(textToBeEncoded)+1) * sizeof(char) * 8);
     int n = 0;
 
-    while(*textToBeEncoded != '\0'){
-        for (int i=0; i< 7; i++){
+    while (*(textToBeEncoded+n/8) != '\0') {        // Im pretty sure that I need '\0' too. So for 8 times
 
-            int bit = getBit(textToBeEncoded, n);
-
-            n++;
+        if (getBit(textToBeEncoded, n) == 1) {
+            Un[n] = '1';
+        } else {   //getBit == 0
+            Un[n] = '0';
         }
+
+        n++;
     }
+    //add manually the '\0' chaacter (10 at decimal)
+    Un[n++]='0';
+    Un[n++]='0';
+    Un[n++]='0';
+    Un[n++]='0';
+    Un[n++]='1';
+    Un[n++]='0';
+    Un[n++]='1';
+    Un[n]='0';
+
+
+    int *fn;
+
+    fn = createPermutationFunction((strlen(textToBeEncoded)+1)*8, 100);    // system-key-integer
+
+
+    srand(100);
+
+    for (int k = 0; k < strlen(textToBeEncoded); k++) {
+        int i = rand() % strlen(textToBeEncoded);
+        int j = rand() % strlen(textToBeEncoded);
+
+        int temp;
+
+        temp = *(fn + i);
+        *(fn + i) = *(fn + j);
+        *(fn + j) = temp;
+
+    }
+
+    // isagogi minimatos stin ikonoa
+
+    for (int i = 0; i < (strlen(textToBeEncoded) + 1) * 8; i++) {
+        int b = getBit(textToBeEncoded, i);     // ipologise b = getbit(m,i)
+        int o = *(fn + i);                      // ipologise 0 = permuation[i]
+        unsigned char temp;
+//        This can be done in 1 line, but complicated
+//        temp = *(bitmapdata + (o/8));
+//        temp = (temp ^ 1);
+//        *(bitmapdata + (o/8))=temp;
+
+        // diagrafi bit mikroterou varous tou o-ostou byte
+        // tou pinaka ton pixel kai
+        // antikatastasi tou me tin timi b
+        *(bitmapData + (o / 8)) = (*(bitmapData + (o / 8)) ^ b);
+
+    }
+
+    fwrite(bitmapData, bitmapInfoHeader->biSizeImage, 1, newFile);
 
 
 }

@@ -44,4 +44,6 @@ char *inputString(FILE *fp, size_t size, int flag);
 
 int getBit(char *m, int n);
 
+void stega_encrypt(char *textToBeEncoded, unsigned char *bitmapData, BITMAPINFOHEADER *bitmapInfoHeader, FILE *newFile);
+
 #endif //HW4_BMPLIB_H

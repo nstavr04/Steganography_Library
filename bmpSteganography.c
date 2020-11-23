@@ -136,6 +136,9 @@ int main(int argc, char *argv[]) {
         fclose(fp);
 
     } else if (strcmp(argv[1], "-encodeText") == 0) {   // Operation 5
+
+        PIXEL *pixels;
+
         //The file to save the Image to new-
         //5 Bytes because we need the \0 too
         char* newFileName = malloc(strlen(argv[2]) + 5);
@@ -164,18 +167,20 @@ int main(int argc, char *argv[]) {
 
         bitmapData = LoadBitmapFile(argv[2], &bitmapFileHeader, &bitmapInfoHeader);
 
+        pixels = getEachPixel(bitmapData, &bitmapInfoHeader);
+
         fwrite(&bitmapFileHeader, sizeof(BITMAPFILEHEADER), 1, newFile);    // Write BITMAPFILEHEADER to the new file
         fwrite(&bitmapInfoHeader, sizeof(BITMAPINFOHEADER), 1, newFile);    // Write BITMAPINFOHEADER to the new file
 
         encodedText = inputString(fileText, 1, 1);  // Read the text from file
 
-//        char *text = "Big rumble in New Guinea.";
+//        char *text = "\nBig rumble in New Guinea.";
 //
 //        char *test = NULL;
 //
 //        test = malloc(sizeof(char)*26);
 //
-//        for(int i=0;i<=25;i++){
+//        for(int i=0;i<=7;i++){
 //            if(getBit(text,i) == 1){
 //                test[i] = '1' ;
 //            }
@@ -185,13 +190,15 @@ int main(int argc, char *argv[]) {
 //
 //        }
 //
-//        test[24] = '\0';
+//        test[8] = '\0';
 //
 //        printf("%s",test);
 
 
 
         printf("%s", encodedText);  // Print it just to be sure
+
+        stega_encrypt(encodedText, bitmapData, &bitmapInfoHeader,newFile);
 
     fclose(fileText);
     fclose(newFile);
