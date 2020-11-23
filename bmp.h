@@ -52,6 +52,11 @@ typedef struct pixel{
 
 unsigned char *LoadBitmapFile(char *filename, BITMAPFILEHEADER *bitmapFileHeader, BITMAPINFOHEADER *bitmapInfoHeader);
 
+/** @brief This function prints all the header values of the image
+ *
+ * @param bitmapFileHeader
+ * @param bitmapInfoHeader
+ */
 void imageInfo(BITMAPFILEHEADER bitmapFileHeader, BITMAPINFOHEADER bitmapInfoHeader);
 
 PIXEL *getEachPixel(unsigned char *bitmapData, BITMAPINFOHEADER *bitmapInfoHeader);

@@ -102,7 +102,7 @@ void stega_encrypt(char *textToBeEncoded, unsigned char *bitmapData, BITMAPINFOH
 
     srand(100);
 
-    for (int k = 0; k < strlen(textToBeEncoded); k++) {
+    for (int k = 0; k < (strlen(textToBeEncoded)+1)*8; k++) {
         int i = rand() % strlen(textToBeEncoded);
         int j = rand() % strlen(textToBeEncoded);
 
@@ -128,7 +128,17 @@ void stega_encrypt(char *textToBeEncoded, unsigned char *bitmapData, BITMAPINFOH
         // diagrafi bit mikroterou varous tou o-ostou byte
         // tou pinaka ton pixel kai
         // antikatastasi tou me tin timi b
-        *(bitmapData + (o / 8)) = (*(bitmapData + (o / 8)) ^ b);
+
+        if (b == 0) {
+            *(bitmapData + (o / 8)) = (*(bitmapData + (o / 8)) & 0xFE);
+        } else if (b == 1) {
+            *(bitmapData + (o / 8)) = (*(bitmapData + (o / 8)) | b);
+        }else{
+            printf("In encodeText -> stega_encrypt, b should be 0 or 1 and its value is: %d\n", b);
+        }
+
+        //*(bitmapData + (o / 8)) = (*(bitmapData + (o / 8)) ^ b);
+
 
     }
 
