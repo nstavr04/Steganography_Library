@@ -1,6 +1,14 @@
-//
-// Created by mvasil17 & nstavr04 on 19/11/2020.
-//
+/**
+* @file bmpSteganography.c
+* @brief The main class of our .bmp manipulation program
+*
+* This class is the main class of our program which we will execute with the appropriate -option every time
+ * accordingly to how we want to manipulate an image
+*
+* @author nstavr04,mvasil17
+* @bug No known bugs.
+*/
+
 #include "bmp.h"
 #include "bmplib.h"
 
@@ -256,7 +264,7 @@ int main(int argc, char *argv[]) {
 //            exit(-1);
 //        }
 
-        textToImage(bitmapData, &bitmapFileHeader, &bitmapInfoHeader,newFile,argv[3],cnt);
+        StringToImage(bitmapData, &bitmapFileHeader, &bitmapInfoHeader,newFile,argv[3],cnt);
 
 
     } else if (strcmp(argv[1], "-imageToString") == 0) {

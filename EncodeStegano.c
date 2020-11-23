@@ -1,10 +1,27 @@
-//
-// Created by 35799 on 19/11/2020.
-//
+/**
+* @file EncodeStegano.c
+* @brief The class that implements the image encoding to another image function
+*
+* This class takes an images and encodes the 1-4 msb of it to anothers image 1-4 lsb
+* Both images need to have the same dimentions
+*
+* @author nstavr04
+* @bug No known bugs.
+*/
 
 #include "bmp.h"
 #include "bmplib.h"
 
+/**
+ * @The function of the class used to encode our image into another image
+ *
+ * @param imagePixels the pixels of the secret image we want to hide
+ * @param pixels the pixels of the visible image
+ * @param SecretFileHeader the file header of the image (both have the same headers)
+ * @param SecretInfoHeader the info header of the image (both have the same headers)
+ * @param fp the file pointer to the new image we will create that will have the secret image encoded
+ * @param nbBits the amount of msb bits of the secret image that we want to hide (1-4)
+ */
 void encodeStegano(PIXEL *imagePixels,PIXEL *pixels, BITMAPFILEHEADER *SecretFileHeader, BITMAPINFOHEADER *SecretInfoHeader, FILE *fp,char *nbBits){
 
     fwrite(SecretFileHeader, sizeof(BITMAPFILEHEADER), 1, fp);

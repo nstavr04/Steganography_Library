@@ -1,11 +1,22 @@
-//
-// Created by 35799 on 19/11/2020.
-//
+/**
+* @file List.c
+* @brief The class that prints the header of a .bmp image
+*
+* This class takes a 24 bit .bmp image and prints the contents of the file and info header
+*
+* @author nstavr04,mvasil17
+* @bug No known bugs.
+*/
 
 #include "bmp.h"
 #include "bmplib.h"
 
-
+/**
+ * The function that prints the contents of the file and info header of an image
+ *
+ * @param bitmapFileHeader the file header of the image
+ * @param bitmapInfoHeader the info header of the image
+ */
 void imageInfo(BITMAPFILEHEADER bitmapFileHeader, BITMAPINFOHEADER bitmapInfoHeader) {
 
     printf("BITMAP_FILE_HEADER\n");

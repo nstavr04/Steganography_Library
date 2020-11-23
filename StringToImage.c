@@ -1,11 +1,17 @@
-//
-// Created by 35799 on 19/11/2020.
-//
+/**
+* @file StringToImage.c
+* @brief The class that implements the GrayScale function.
+*
+* This class takes an images and creates the grayscaled version of the image
+*
+* @author nstavr04
+* @bug No known bugs.
+*/
 
 #include "bmp.h"
 #include "bmplib.h"
 
-void textToImage(unsigned char *bitmapData, BITMAPFILEHEADER *bitmapFileHeader, BITMAPINFOHEADER *bitmapInfoHeader,
+void StringToImage(unsigned char *bitmapData, BITMAPFILEHEADER *bitmapFileHeader, BITMAPINFOHEADER *bitmapInfoHeader,
                  FILE *newFile, char *arg, int length) {
 
     //Writing the header of the image since we want it to remain the same
