@@ -52,15 +52,33 @@ void StringToImage(unsigned char *bitmapData, BITMAPFILEHEADER *bitmapFileHeader
 //        }
 //    }
 
-    //Working but not the way we want to put them from top right
-    for (int i = 0; i < bitmapInfoHeader->biSizeImage; i += 3) {
+    PIXEL *pixels;
+    pixels = getEachPixel(bitmapData,bitmapInfoHeader);
 
-        *(bitmapData + i) = 128 * getBit(array, i/3);
-        *(bitmapData + i + 1) = 128 * getBit(array, i/3);
-        *(bitmapData + i + 2) = 128 * getBit(array, i/3);
+
+  //  Working but not the way we want to put them from top right
+//    for (int i = 0; i < bitmapInfoHeader->biSizeImage; i += 3) {
+//
+//        *(bitmapData + i) = 128 * getBit(array, i/3);
+//        *(bitmapData + i + 1) = 128 * getBit(array, i/3);
+//        *(bitmapData + i + 2) = 128 * getBit(array, i/3);
+//    }
+//
+//    fwrite(bitmapData, bitmapInfoHeader->biSizeImage, 1, newFile);
+
+    for(int i=0;i<bitmapInfoHeader->biHeight;i++){
+        for(int j=0;j<bitmapInfoHeader->biWidth;j++){
+            pixels->red = 128*getBit(array,bitmapInfoHeader->biHeight*i +j);
+            pixels->green = 128*getBit(array,bitmapInfoHeader->biHeight*i +j);
+            pixels->blue = 128*getBit(array,bitmapInfoHeader->biHeight*i +j);
+
+            fwrite(&pixels, 3, 1, newFile);
+
+        }
+
     }
 
-    fwrite(bitmapData, bitmapInfoHeader->biSizeImage, 1, newFile);
+
 
 
 
