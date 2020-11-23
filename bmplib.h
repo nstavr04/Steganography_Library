@@ -42,6 +42,16 @@ void decodeStegano(PIXEL *pixels, BITMAPFILEHEADER *SecretFileHeader, BITMAPINFO
  */
 char *inputString(FILE *fp, size_t size, int flag);
 
+/**
+ * The function used in operation 7
+ *
+ * @param bitmapData
+ * @param bitmapFileHeader
+ * @param bitmapInfoHeader
+ * @param newFile
+ */
+void textToImage(unsigned char *bitmapData, BITMAPFILEHEADER *bitmapFileHeader, BITMAPINFOHEADER  *bitmapInfoHeader, FILE *newFile,char *arg,int length);
+
 int getBit(char *m, int n);
 
 void stega_encrypt(char *textToBeEncoded, unsigned char *bitmapData, BITMAPINFOHEADER *bitmapInfoHeader, FILE *newFile);

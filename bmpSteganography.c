@@ -211,7 +211,6 @@ int main(int argc, char *argv[]) {
         char* newFileName = malloc(strlen(argv[2]) + 5);
         strcpy(newFileName,"new-");
         strcat(newFileName, argv[2]);
-        printf("newfile: %s\n", newFileName);
 
         // Open the new file (create it)
         FILE *newFile = NULL;
@@ -229,12 +228,35 @@ int main(int argc, char *argv[]) {
             exit(-1);
         }
 
+        //Calculating the length of the text of the file
+        int c;
+        int cnt = 0;
+
+        while((c = fgetc(fileText)) != EOF){
+            cnt++;
+        }
+
+        //Closing text pointer to open it again after for inputting the chars data into the image
+        fclose(fileText);
+
         bitmapData = LoadBitmapFile(argv[2], &bitmapFileHeader, &bitmapInfoHeader);
 
-        fwrite(&bitmapFileHeader, sizeof(BITMAPFILEHEADER), 1, newFile);    // Write BITMAPFILEHEADER to the new file
-        fwrite(&bitmapInfoHeader, sizeof(BITMAPINFOHEADER), 1, newFile);    // Write BITMAPINFOHEADER to the new file
+        //Freeing all the image pixels and allocating the memory with 0
+        free(bitmapData);
 
+        bitmapData = calloc(sizeof(unsigned  char),bitmapInfoHeader.biSizeImage);
 
+        //fwrite(&bitmapFileHeader, sizeof(BITMAPFILEHEADER), 1, newFile);    // Write BITMAPFILEHEADER to the new file
+        //fwrite(&bitmapInfoHeader, sizeof(BITMAPINFOHEADER), 1, newFile);
+
+        //Making sure that the text size is enough to fit the image size
+        // ITS >
+//        if(bitmapInfoHeader.biSizeImage > cnt){
+//            printf("The text size is not enough to fit into the image");
+//            exit(-1);
+//        }
+
+        textToImage(bitmapData, &bitmapFileHeader, &bitmapInfoHeader,newFile,argv[3],cnt);
 
 
     } else if (strcmp(argv[1], "-imageToString") == 0) {
