@@ -69,7 +69,7 @@ int *createPermutationFunction(int N, unsigned int systemkey) {
     return permutation;
 }
 
-int getBit(char *m,int n){
+int getBit(unsigned char *m,int n){
     if(n>=0 && n<=8*strlen(m)){
         int i = n/8;
         char ch = m[i];

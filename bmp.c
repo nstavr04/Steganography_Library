@@ -66,7 +66,7 @@ unsigned char *LoadBitmapFile(char *filename, BITMAPFILEHEADER *bitmapFileHeader
 //        bitmapImage[imageIdx + 2] = tempRGB;
 //    }
 
-    //close file and return bitmap iamge data
+    //close file and return bitmap image data
     fclose(filePtr);
     return bitmapImage;
 }

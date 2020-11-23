@@ -29,59 +29,32 @@ void StringToImage(unsigned char *bitmapData, BITMAPFILEHEADER *bitmapFileHeader
     //Used to save the text file into an array
     array = inputString(fileText, length, 1);
 
-//    int n=0;
-//
-//    while (*(array + n/8) != '\0' && n < bitmapInfoHeader->biSizeImage){
-//
-//        //printf("%d",getBit(array,n));
-//
-//            *(bitmapData+n) = 128*getBit(array,n);
-//            *(bitmapData+n+1) = 128*getBit(array,n);
-//            *(bitmapData+n+2) = 128*getBit(array,n);
-//
-//        n+=3;
-//    }
-
-//    for(int i=0;i<bitmapInfoHeader->biWidth;i++){
-//        for(int j=0;j<bitmapInfoHeader->biHeight;j++){
-//
-//            *((bitmapData) + (bitmapInfoHeader->biHeight -j -1)*bitmapInfoHeader->biWidth + i) = 128*getBit(array,bitmapInfoHeader->biHeight*i + j);
-//            *((bitmapData) + (bitmapInfoHeader->biHeight -j -1)*bitmapInfoHeader->biWidth + i + 1) = 128*getBit(array,bitmapInfoHeader->biHeight*i + j);
-//            *((bitmapData) + (bitmapInfoHeader->biHeight -j -1)*bitmapInfoHeader->biWidth + i + 2)= 128*getBit(array,bitmapInfoHeader->biHeight*i + j);
-//
-//        }
-//    }
-
-    PIXEL *pixels;
-    pixels = getEachPixel(bitmapData,bitmapInfoHeader);
+//    PIXEL *pixels;
+//    pixels = getEachPixel(bitmapData,bitmapInfoHeader);
 
 
-  //  Working but not the way we want to put them from top right
-//    for (int i = 0; i < bitmapInfoHeader->biSizeImage; i += 3) {
-//
-//        *(bitmapData + i) = 128 * getBit(array, i/3);
-//        *(bitmapData + i + 1) = 128 * getBit(array, i/3);
-//        *(bitmapData + i + 2) = 128 * getBit(array, i/3);
-//    }
-//
-//    fwrite(bitmapData, bitmapInfoHeader->biSizeImage, 1, newFile);
+    //Working but not the way we want to put them from top right
+    for (int i = 0; i < bitmapInfoHeader->biSizeImage; i += 3) {
 
-    for(int i=0;i<bitmapInfoHeader->biHeight;i++){
-        for(int j=0;j<bitmapInfoHeader->biWidth;j++){
-            pixels->red = 128*getBit(array,bitmapInfoHeader->biHeight*i +j);
-            pixels->green = 128*getBit(array,bitmapInfoHeader->biHeight*i +j);
-            pixels->blue = 128*getBit(array,bitmapInfoHeader->biHeight*i +j);
-
-            fwrite(&pixels, 3, 1, newFile);
-
-        }
-
+        *(bitmapData + i) = 128 * getBit(array, i/3);
+        *(bitmapData + i + 1) = 128 * getBit(array, i/3);
+        *(bitmapData + i + 2) = 128 * getBit(array, i/3);
     }
 
+    fwrite(bitmapData, bitmapInfoHeader->biSizeImage, 1, newFile);
 
-
-
-
+//    for(int i=0;i<bitmapInfoHeader->biHeight;i++){
+//        for(int j=0;j<bitmapInfoHeader->biWidth;j++){
+//            pixels->red= 128*getBit(array,bitmapInfoHeader->biHeight*i +j);
+//            pixels->green = 128*getBit(array,bitmapInfoHeader->biHeight*i +j);
+//            pixels->blue = 128*getBit(array,bitmapInfoHeader->biHeight*i +j);
+//
+//            //3 because rgb is 3 bytes
+//            fwrite(pixels,3,1,newFile);
+//
+//        }
+//
+//    }
 
     //Dynamically declaring a 2d array where we will save in correct order our pixels
 

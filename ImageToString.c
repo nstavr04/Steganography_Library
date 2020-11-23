@@ -49,5 +49,34 @@ void ImageToString(unsigned char *bitmapData, BITMAPFILEHEADER *bitmapFileHeader
 
     }
 
+//    PIXEL *pixels;
+//    pixels = getEachPixel(bitmapData,bitmapInfoHeader);
+
+//    int curPos = 0;
+
+//    for(int i=0;i<bitmapInfoHeader->biWidth;i++){
+//        for(int j=0;j<bitmapInfoHeader->biHeight;j++){
+//
+//
+//            pixels->red= 128*getBit(bitmapData,bitmapInfoHeader->biHeight*i +j);
+//
+//            number1 = pixels->red >> curPos;
+//
+//            curPos++;
+//
+//            //Create each char by adding the 8 pixels of the image
+//            curChar += number1;
+//
+//            if(curPos == 7) {
+//                curPos = 0;
+//                //3 because rgb is 3 bytes
+//                fprintf(fp,"%c",curChar);
+//            }
+//
+//        }
+//
+//    }
+
+
 
 }

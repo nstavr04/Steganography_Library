@@ -212,14 +212,6 @@ int main(int argc, char *argv[]) {
         strcpy(newFileName,"new-");
         strcat(newFileName, argv[2]);
 
-        // Open the new file (create it)
-        FILE *newFile = NULL;
-        newFile = fopen(newFileName, "wb");
-        if (newFile == NULL) {
-            printf("unable to open");
-            exit(-1);
-        }
-
         // Open the file that contains the text that needs to be encrypted
         FILE *fileText = NULL;
         fileText = fopen(argv[3], "r");
@@ -238,6 +230,14 @@ int main(int argc, char *argv[]) {
 
         //Closing text pointer to open it again after for inputting the chars data into the image
         fclose(fileText);
+
+        // Open the new file (create it)
+        FILE *newFile = NULL;
+        newFile = fopen(newFileName, "wb");
+        if (newFile == NULL) {
+            printf("unable to open");
+            exit(-1);
+        }
 
         bitmapData = LoadBitmapFile(argv[2], &bitmapFileHeader, &bitmapInfoHeader);
 

@@ -72,7 +72,7 @@ char *inputString(FILE *fp, size_t size, int flag);
  * @param n which bit content to return
  * @return the content of n bit , 0 or 1
  */
-int getBit(char *m, int n);
+int getBit(unsigned char *m, int n);
 
 /**
  * @brief
