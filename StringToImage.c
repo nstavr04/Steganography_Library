@@ -50,12 +50,21 @@ void textToImage(unsigned char *bitmapData, BITMAPFILEHEADER *bitmapFileHeader, 
 //        }
 //    }
 
+    int j=0;
+    int k=0;
+
     //Working but not the way we want to put them from top right
     for (int i = 0; i < bitmapInfoHeader->biSizeImage; i += 3) {
 
-        *(bitmapData + i) = 128 * getBit(array, i);
-        *(bitmapData + i + 1) = 128 * getBit(array, i);
-        *(bitmapData + i + 2) = 128 * getBit(array, i);
+        k=i%bitmapInfoHeader->biWidth;
+
+        //0,1,2
+        if(i%bitmapInfoHeader->biHeight <= 2)
+            j++;
+
+        *(bitmapData + i) = 128 * getBit(array, bitmapInfoHeader->biHeight*k + j);
+        *(bitmapData + i + 1) = 128 * getBit(array, bitmapInfoHeader->biHeight*k + j);
+        *(bitmapData + i + 2) = 128 * getBit(array, bitmapInfoHeader->biHeight*k + j);
     }
 
 
