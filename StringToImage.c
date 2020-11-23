@@ -29,32 +29,32 @@ void StringToImage(unsigned char *bitmapData, BITMAPFILEHEADER *bitmapFileHeader
     //Used to save the text file into an array
     array = inputString(fileText, length, 1);
 
-//    PIXEL *pixels;
-//    pixels = getEachPixel(bitmapData,bitmapInfoHeader);
+    PIXEL *pixels;
+    pixels = getEachPixel(bitmapData,bitmapInfoHeader);
 
 
     //Working but not the way we want to put them from top right
-    for (int i = 0; i < bitmapInfoHeader->biSizeImage; i += 3) {
-
-        *(bitmapData + i) = 128 * getBit(array, i/3);
-        *(bitmapData + i + 1) = 128 * getBit(array, i/3);
-        *(bitmapData + i + 2) = 128 * getBit(array, i/3);
-    }
-
-    fwrite(bitmapData, bitmapInfoHeader->biSizeImage, 1, newFile);
-
-//    for(int i=0;i<bitmapInfoHeader->biHeight;i++){
-//        for(int j=0;j<bitmapInfoHeader->biWidth;j++){
-//            pixels->red= 128*getBit(array,bitmapInfoHeader->biHeight*i +j);
-//            pixels->green = 128*getBit(array,bitmapInfoHeader->biHeight*i +j);
-//            pixels->blue = 128*getBit(array,bitmapInfoHeader->biHeight*i +j);
+//    for (int i = 0; i < bitmapInfoHeader->biSizeImage; i += 3) {
 //
-//            //3 because rgb is 3 bytes
-//            fwrite(pixels,3,1,newFile);
-//
-//        }
-//
+//        *(bitmapData + i) = 128 * getBit(array, i/3);
+//        *(bitmapData + i + 1) = 128 * getBit(array, i/3);
+//        *(bitmapData + i + 2) = 128 * getBit(array, i/3);
 //    }
+//
+//    fwrite(bitmapData, bitmapInfoHeader->biSizeImage, 1, newFile);
+
+    for(int i=0;i<bitmapInfoHeader->biHeight;i++){
+        for(int j=0;j<bitmapInfoHeader->biWidth;j++){
+            pixels->red= 128*getBit(array,bitmapInfoHeader->biHeight*j + i);
+            pixels->green = 128*getBit(array,bitmapInfoHeader->biHeight*j + i);
+            pixels->blue = 128*getBit(array,bitmapInfoHeader->biHeight*j + i);
+
+            //3 because rgb is 3 bytes
+            fwrite(pixels,3,1,newFile);
+
+        }
+
+    }
 
     //Dynamically declaring a 2d array where we will save in correct order our pixels
 
