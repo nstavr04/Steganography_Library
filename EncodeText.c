@@ -1,3 +1,10 @@
+/* EncodeText.c
+* Copyright (C) 2020 nstavr04 mvasil17
+* This is free software; you can redistribute it and/or
+* modify it under the terms of the GNU General Public
+* License.
+*/
+
 /**
 * @file EncodeText.c
 * @brief The class that hides a text file into an image.

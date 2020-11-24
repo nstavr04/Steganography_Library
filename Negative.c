@@ -1,6 +1,9 @@
-//
-// Created by nikol on 24/11/2020.
-//
+/* Negative.c
+* Copyright (C) 2020 nstavr04 mvasil17
+* This is free software; you can redistribute it and/or
+* modify it under the terms of the GNU General Public
+* License.
+*/
 
 #include "bmp.h"
 #include "bmplib.h"

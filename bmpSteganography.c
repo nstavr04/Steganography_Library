@@ -1,3 +1,10 @@
+/* bmpSteganography.c
+* Copyright (C) 2020 nstavr04 mvasil17
+* This is free software; you can redistribute it and/or
+* modify it under the terms of the GNU General Public
+* License.
+*/
+
 /**
 * @file bmpSteganography.c
 * @brief The main class of our .bmp manipulation program
@@ -6,7 +13,7 @@
  * accordingly to how we want to manipulate an image
 *
 * @authors nstavr04,mvasil17
-* @bug No known bugs.
+* @bug Only runs on windows. Working for an update to work on Linux as well.
 */
 
 #include "bmp.h"

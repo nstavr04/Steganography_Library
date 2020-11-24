@@ -1,3 +1,10 @@
+/* List.c
+* Copyright (C) 2020 nstavr04 mvasil17
+* This is free software; you can redistribute it and/or
+* modify it under the terms of the GNU General Public
+* License.
+*/
+
 /**
 * @file List.c
 * @brief The class that prints the header of a .bmp image

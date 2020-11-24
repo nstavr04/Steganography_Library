@@ -1,6 +1,19 @@
+/* bmp.c
+* Copyright (C) 2020 nstavr04 mvasil17
+* This is free software; you can redistribute it and/or
+* modify it under the terms of the GNU General Public
+* License.
+*/
 
 #include "bmp.h"
 
+/**
+ * Function to load all the image data details into the memory
+ * @param filename the image file name
+ * @param bitmapFileHeader the image file header
+ * @param bitmapInfoHeader the image info header
+ * @return an unsigned char pointer to the image data
+ */
 unsigned char *LoadBitmapFile(char *filename, BITMAPFILEHEADER *bitmapFileHeader, BITMAPINFOHEADER *bitmapInfoHeader) {
     FILE *filePtr; //our file pointer
     unsigned char *bitmapImage;  //store image data
@@ -47,7 +60,12 @@ unsigned char *LoadBitmapFile(char *filename, BITMAPFILEHEADER *bitmapFileHeader
     return bitmapImage;
 }
 
-
+/**
+ * Function to assign the image data into a pixel structure
+ * @param bitmapData the image data
+ * @param bitmapInfoHeader the image info header
+ * @return a pixel pointer to the image pixel structure
+ */
 PIXEL *getEachPixel(unsigned char *bitmapData, BITMAPINFOHEADER *bitmapInfoHeader) {
 
     int numOfEachLinePadding;

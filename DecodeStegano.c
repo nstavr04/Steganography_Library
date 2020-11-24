@@ -1,10 +1,21 @@
-//
-// Created by 35799 on 19/11/2020.
-//
+/* DecodeStegano.c
+* Copyright (C) 2020 nstavr04 mvasil17
+* This is free software; you can redistribute it and/or
+* modify it under the terms of the GNU General Public
+* License.
+*/
 
 #include "bmp.h"
 #include "bmplib.h"
 
+/**
+ *
+ * @param pixels
+ * @param SecretFileHeader
+ * @param SecretInfoHeader
+ * @param fp
+ * @param nbBits
+ */
 void decodeStegano(PIXEL *pixels, BITMAPFILEHEADER *SecretFileHeader, BITMAPINFOHEADER *SecretInfoHeader, FILE *fp,char *nbBits) {
 
     fwrite(SecretFileHeader, sizeof(BITMAPFILEHEADER), 1, fp);
