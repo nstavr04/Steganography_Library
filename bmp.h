@@ -19,7 +19,6 @@
  * Bitmap file header
  */
 typedef struct tagBITMAPFILEHEADER {    /*  14 bytes  */
-//    char           bfType[3];    /* 2 bytes + null char */
     char           bfType1;      /* 1 byte  */  // specifies the file type
     char           bfType2;      /* 1 byte  */  // specifies the file type
     unsigned int   bfSize;       /* 4 bytes */  // specifies the size in bytes of the bitmap file
@@ -43,7 +42,7 @@ typedef struct tagBITMAPINFOHEADER {    /*  40 bytes  */
     long           biYPixPerMeter;  /* 4 bytes */   // Specifies the vertical pixels per meter on the designated target device, usually set to zero.
     unsigned long  biClrUsed;       /* 4 bytes */   // Specifies the number of colors used in the bitmap, if set to zero the number of colors is calculated using the biBitCount member.
     unsigned long  biClrImportant;  /* 4 bytes */   // Specifies the number of color that are 'important' for the bitmap, if set to zero, all colors are important.
-} BITMAPINFOHEADER;
+} __attribute__((packed))BITMAPINFOHEADER;
 
 /**
  * Bitmap pixel. (isPadding byte is just to make sure that this is a pixel or a padding)

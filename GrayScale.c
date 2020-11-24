@@ -45,14 +45,13 @@ void makePictureGrayScaled(PIXEL *pixels, BITMAPFILEHEADER *bitmapFileHeader, BI
 
     fwrite(bitmapFileHeader, sizeof(BITMAPFILEHEADER), 1, fp);
     fwrite(bitmapInfoHeader, sizeof(BITMAPINFOHEADER), 1, fp);
-    //fwrite(pixels, bitmapInfoHeader->biSizeImage, 1, fp);
 
     // We cant use fwrite because our structure PIXEL has 4 bytes instead of 3 for the RGB
     for (int i = 0; i < ((bitmapInfoHeader->biSizeImage)/3); i++){
 
-        fwrite(&pixels[i].blue,1,1,fp);
-        fwrite(&pixels[i].green,1,1,fp);
-        fwrite(&pixels[i].red,1,1,fp);
+        fwrite(&pixels[i].blue,sizeof(unsigned char ),1,fp);
+        fwrite(&pixels[i].green,sizeof(unsigned char ),1,fp);
+        fwrite(&pixels[i].red,sizeof(unsigned char ),1,fp);
 
     }
 

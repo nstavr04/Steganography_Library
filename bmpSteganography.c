@@ -34,6 +34,8 @@ int main(int argc, char *argv[]) {
     //Used in encodeImage
     unsigned char *secretImage;
 
+    //Used for when an operation is completed
+    int flag = 0;
 
     if (argc < 3) {
         printf("Wrong input");
@@ -282,8 +284,12 @@ int main(int argc, char *argv[]) {
     }
     else{
         printf("Wrong -option input");
+        flag = 1;
         exit(-1);
     }
+
+    if(!flag)
+        printf("Operation Successful");
 
     free(bitmapData);
 
