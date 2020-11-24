@@ -36,6 +36,7 @@ int main(int argc, char *argv[]) {
 
 
     if (argc < 3) {
+        printf("Wrong input");
         return 0;
     }
 
@@ -71,7 +72,9 @@ int main(int argc, char *argv[]) {
 
             fclose(fp);
         }
+
         free(pixels);
+
     } else if (strcmp(argv[1], "-encodeStegano") == 0) { //Operation 3
 
         PIXEL *pixels;
@@ -187,7 +190,8 @@ int main(int argc, char *argv[]) {
     fclose(newFile);
 
     } else if (strcmp(argv[1], "-decodeText") == 0) {   //Operation 6
-//         Open the new file (create it)
+
+        //Open the new file (create it)
         if (argc != 5){
             printf("You need to enter 5 arguments for that operation.\n e.g. $./bmpSteganography –decodeText encryptedImage.bmp msgLength output.txt");
         }
@@ -201,11 +205,9 @@ int main(int argc, char *argv[]) {
             exit(-1);
         }
 
-
         bitmapData = LoadBitmapFile(argv[2], &bitmapFileHeader, &bitmapInfoHeader);
 
         stegaEncryptDecodeText(bitmapData, &bitmapInfoHeader, systemKey, textSizeInBytes, outputFile);
-
 
     } else if (strcmp(argv[1], "-stringToImage") == 0) {    //Operation 7
         //The file to save the Image to new-
@@ -248,18 +250,7 @@ int main(int argc, char *argv[]) {
 
         bitmapData = calloc(bitmapInfoHeader.biSizeImage,sizeof(unsigned  char));
 
-        //fwrite(&bitmapFileHeader, sizeof(BITMAPFILEHEADER), 1, newFile);    // Write BITMAPFILEHEADER to the new file
-        //fwrite(&bitmapInfoHeader, sizeof(BITMAPINFOHEADER), 1, newFile);
-
-        //Making sure that the text size is enough to fit the image size
-        // ITS >
-//        if(bitmapInfoHeader.biSizeImage > cnt){
-//            printf("The text size is not enough to fit into the image");
-//            exit(-1);
-//        }
-
         StringToImage(bitmapData, &bitmapFileHeader, &bitmapInfoHeader,newFile,argv[3],cnt);
-
 
     } else if (strcmp(argv[1], "-imageToString") == 0) { //Operation 8
 
@@ -268,12 +259,33 @@ int main(int argc, char *argv[]) {
 
         ImageToString(bitmapData,&bitmapFileHeader,&bitmapInfoHeader);
 
+    } else if(strcmp(argv[1], "-negativeFilter") == 0){ //Operation 9
+
+        PIXEL *pixels;
+        int counter = 2;  // program argument 1 Is the operations. (-negativeFilter)
+        while (counter < argc) {
+
+            bitmapData = LoadBitmapFile(argv[counter], &bitmapFileHeader, &bitmapInfoHeader);
+
+            FILE *fp = fopen(argv[counter], "wb");
+
+            pixels = getEachPixel(bitmapData, &bitmapInfoHeader);
+
+            makePictureNegative(pixels, &bitmapFileHeader, &bitmapInfoHeader, fp);
+
+            counter++;
+
+            fclose(fp);
+        }
+        free(pixels);
+
     }
     else{
         printf("Wrong -option input");
         exit(-1);
     }
 
+    free(bitmapData);
 
     return 0;
 

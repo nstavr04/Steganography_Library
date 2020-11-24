@@ -116,7 +116,21 @@ int *createPermutationFunction(int N, unsigned int systemkey);
  */
 void StringToImage(unsigned char *bitmapData, BITMAPFILEHEADER *bitmapFileHeader, BITMAPINFOHEADER  *bitmapInfoHeader, FILE *newFile,char *arg,int length);
 
-
+/**
+ *
+ * @param bitmapData
+ * @param bitmapFileHeader
+ * @param bitmapInfoHeader
+ */
 void ImageToString(unsigned char *bitmapData, BITMAPFILEHEADER *bitmapFileHeader, BITMAPINFOHEADER *bitmapInfoHeader);
+
+/**
+ *
+ * @param pixels
+ * @param bitmapFileHeader
+ * @param bitmapInfoHeader
+ * @param fp
+ */
+void makePictureNegative(PIXEL *pixels, BITMAPFILEHEADER *bitmapFileHeader, BITMAPINFOHEADER *bitmapInfoHeader, FILE *fp);
 
 #endif //HW4_BMPLIB_H

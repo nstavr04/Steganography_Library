@@ -3,7 +3,6 @@
 
 unsigned char *LoadBitmapFile(char *filename, BITMAPFILEHEADER *bitmapFileHeader, BITMAPINFOHEADER *bitmapInfoHeader) {
     FILE *filePtr; //our file pointer
-    //BITMAPFILEHEADER bitmapFileHeader; //our bitmap file header
     unsigned char *bitmapImage;  //store image data
 
     //open filename in read binary mode
@@ -59,7 +58,6 @@ PIXEL *getEachPixel(unsigned char *bitmapData, BITMAPINFOHEADER *bitmapInfoHeade
         numOfEachLinePadding = (bitmapInfoHeader->biWidth)*3%4;
     }
 
-    printf("size of PIXEL: %llu\n", sizeof(PIXEL));
     PIXEL *pixels = malloc(sizeof(PIXEL) * ((bitmapInfoHeader->biSizeImage)/3));    //each pixel is 3 bytes
     if (!pixels){
         printf("Unable to allocate memory");
