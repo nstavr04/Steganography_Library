@@ -78,29 +78,29 @@ int getBit(unsigned char *m, int n);
 
 /** @brief This function encodes(hides) a text inside a .bmp picture.
  *
- * @param textToBeEncoded
- * @param bitmapData
- * @param bitmapInfoHeader
- * @param newFile
+ * @param textToBeEncoded the text that needs to be encoded
+ * @param bitmapData the data of the .bmp picture in bytes
+ * @param bitmapInfoHeader the info header
+ * @param newFile the file that
  */
 void stegaEncryptEncodeText(char *textToBeEncoded, unsigned char *bitmapData, int systemKey, BITMAPINFOHEADER *bitmapInfoHeader, FILE *newFile);
 
 /** @brief This function decodes the hidden text inside a .bmp picture and makes back to its .txt format
  *
- * @param bitmapData
- * @param bitmapInfoHeader
- * @param systemKey
- * @param length
- * @param outputFile
+ * @param bitmapData he data of the .bmp picture in byte
+ * @param bitmapInfoHeader the info header
+ * @param systemKey the key that is used as seed to create pseudorandom numbers
+ * @param length the length of the text that needs to be decoded (MUST BE CORRECT)
+ * @param outputFile the file that we write
  */
 void stegaEncryptDecodeText(unsigned char *bitmapData, BITMAPINFOHEADER *bitmapInfoHeader, int systemKey, int length, FILE *outputFile);
 
 
 /** @brief This function creates pseudorandom permutations using a system-key integer
  *
- * @param N
- * @param systemkey
- * @return
+ * @param N the size of image in bytes
+ * @param systemkey the key that is used as seed to create pseudorandom numbers
+ * @return the int table with all the permutations
  */
 int *createPermutationFunction(int N, unsigned int systemkey);
 
@@ -116,20 +116,20 @@ int *createPermutationFunction(int N, unsigned int systemkey);
  */
 void StringToImage(unsigned char *bitmapData, BITMAPFILEHEADER *bitmapFileHeader, BITMAPINFOHEADER  *bitmapInfoHeader, FILE *newFile,char *arg,int length);
 
-/**
+/** @brief This function is used to decrypt the hidden message from a .bmp image
  *
- * @param bitmapData
- * @param bitmapFileHeader
- * @param bitmapInfoHeader
+ * @param bitmapData a pointer to our picture data
+ * @param bitmapFileHeader the bitmap file header
+ * @param bitmapInfoHeader the bitmap info header
  */
 void ImageToString(unsigned char *bitmapData, BITMAPFILEHEADER *bitmapFileHeader, BITMAPINFOHEADER *bitmapInfoHeader);
 
-/**
+/** @brief This function is used to encrypt a message into a .bmp image
  *
- * @param pixels
- * @param bitmapFileHeader
- * @param bitmapInfoHeader
- * @param fp
+ * @param pixels the table with all the pixels of the image
+ * @param bitmapFileHeader the bitmap file header
+ * @param bitmapInfoHeader the bitmap info header
+ * @param fp the file that we apply on, and write the new .bmp image
  */
 void makePictureNegative(PIXEL *pixels, BITMAPFILEHEADER *bitmapFileHeader, BITMAPINFOHEADER *bitmapInfoHeader, FILE *fp);
 
