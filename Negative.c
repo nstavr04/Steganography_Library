@@ -38,3 +38,33 @@ void makePictureNegative(PIXEL *pixels, BITMAPFILEHEADER *bitmapFileHeader, BITM
     }
 
 }
+
+#ifdef NegativeDEBUG
+int main(int argc, char *argv[]){
+
+    unsigned char *bitmapData;
+
+    BITMAPINFOHEADER bitmapInfoHeader;
+
+    BITMAPFILEHEADER bitmapFileHeader;
+
+    PIXEL *pixels;
+    int counter = 2;  // program argument 1 Is the operations. (-negativeFilter)
+    while (counter < argc) {
+
+        bitmapData = LoadBitmapFile(argv[counter], &bitmapFileHeader, &bitmapInfoHeader);
+
+        FILE *fp = fopen(argv[counter], "wb");
+
+        pixels = getEachPixel(bitmapData, &bitmapInfoHeader);
+
+        makePictureNegative(pixels, &bitmapFileHeader, &bitmapInfoHeader, fp);
+
+        counter++;
+
+        fclose(fp);
+    }
+    free(pixels);
+
+}
+#endif

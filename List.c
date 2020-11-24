@@ -51,3 +51,27 @@ void imageInfo(BITMAPFILEHEADER bitmapFileHeader, BITMAPINFOHEADER bitmapInfoHea
     printf("biClrImportand: %lu\n", bitmapInfoHeader.biClrImportant);
 
 }
+//Driver function
+#ifdef ListDEBUG
+int main(int argc, char *argv[]) {
+
+    unsigned char *bitmapData;
+
+    BITMAPINFOHEADER bitmapInfoHeader;
+
+    BITMAPFILEHEADER bitmapFileHeader;
+
+    int counter = 2;  // program argument 1 Is the operations. (-list)
+    bitmapData = LoadBitmapFile(argv[counter], &bitmapFileHeader, &bitmapInfoHeader);
+
+    if (bitmapData !=
+        NULL) {  // If bitmapData == null, it means that the file given is not valid, or there is no memory to allocate
+        imageInfo(bitmapFileHeader, bitmapInfoHeader);
+        if (counter != (argc - 1)) {
+            printf("\n***************************************************************************\n");
+        }
+    }
+    counter++;
+
+}
+#endif

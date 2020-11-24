@@ -57,3 +57,20 @@ void ImageToString(unsigned char *bitmapData, BITMAPFILEHEADER *bitmapFileHeader
     }
 
 }
+
+#ifdef ImageToStringDEBUG
+int main(int argc, char *argv[]) {
+
+    unsigned char *bitmapData;
+
+    BITMAPINFOHEADER bitmapInfoHeader;
+
+    BITMAPFILEHEADER bitmapFileHeader;
+
+    //Save the data of the image in bitmapData
+    bitmapData = LoadBitmapFile(argv[2], &bitmapFileHeader, &bitmapInfoHeader);
+
+    ImageToString(bitmapData,&bitmapFileHeader,&bitmapInfoHeader);
+
+}
+#endif

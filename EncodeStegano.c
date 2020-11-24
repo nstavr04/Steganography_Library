@@ -144,3 +144,63 @@ void encodeStegano(PIXEL *imagePixels,PIXEL *pixels, BITMAPFILEHEADER *SecretFil
     }
 
 }
+
+//Driver function
+#ifdef EncodeSteganoDEBUG
+int main (int argc, char *argv[]) {
+
+    PIXEL *pixels;
+
+    BITMAPINFOHEADER secretInfoHeader;
+
+    BITMAPFILEHEADER secretFileHeader;
+
+    unsigned char *secretImage;
+
+    PIXEL *imagePixels;
+
+    unsigned char *bitmapData;
+
+    BITMAPINFOHEADER bitmapInfoHeader;
+
+    BITMAPFILEHEADER bitmapFileHeader;
+
+    //Checking if nbBits are correct
+    if(strcmp(argv[2] , "1") != 0 && strcmp(argv[2] , "2") != 0 && strcmp(argv[2] , "3") != 0 && strcmp(argv[2] , "4") != 0){
+        printf("Wrong nbBits input. nbBits should be 1-4");
+        exit(-1);
+    }
+
+    //Save the data of the first image in bitmapData
+    bitmapData = LoadBitmapFile(argv[3], &bitmapFileHeader, &bitmapInfoHeader);
+
+    //Save the data of the secret Image
+    secretImage = LoadBitmapFile(argv[4], &secretFileHeader, &secretInfoHeader);
+
+    //Checking that the images have the same dimentions
+    if(bitmapInfoHeader.biWidth != secretInfoHeader.biWidth && bitmapInfoHeader.biHeight != secretInfoHeader.biHeight){
+        printf("Images need to have the same dimentions");
+        exit(-1);
+    }
+
+    //The file to save the Image to new-
+    //5 Bytes because we need the \0 too
+    char* newFile = (char *)malloc(strlen(argv[3]) + 5);
+    strcpy(newFile,"new-");
+    strcat(newFile, argv[3]);
+
+    FILE *fp = fopen(newFile, "wb");
+
+    pixels = getEachPixel(bitmapData, &bitmapInfoHeader);
+
+    imagePixels = getEachPixel(secretImage,&secretInfoHeader);
+
+    encodeStegano(imagePixels,pixels, &bitmapFileHeader, &bitmapInfoHeader, fp,argv[2]);
+
+    free(pixels);
+    free(imagePixels);
+    free(newFile);
+
+    fclose(fp);
+}
+#endif

@@ -44,3 +44,36 @@ void stegaEncryptDecodeText(unsigned char *bitmapData, BITMAPINFOHEADER *bitmapI
         }
     }
 }
+
+//Driver function
+#ifdef DecodeTextDEBUG
+int main (int argc, char *argv[]){
+
+    int systemKey = 100;
+
+    unsigned char *bitmapData;
+
+    BITMAPINFOHEADER bitmapInfoHeader;
+
+    BITMAPFILEHEADER bitmapFileHeader;
+
+    //Open the new file (create it)
+    if (argc != 5){
+        printf("You need to enter 5 arguments for that operation.\n e.g. $./bmpSteganography –decodeText encryptedImage.bmp msgLength output.txt");
+    }
+
+    int textSizeInBytes = atoi(argv[3]);
+
+    FILE *outputFile = NULL;
+    outputFile = fopen(argv[4], "w");
+    if (outputFile == NULL) {
+        printf("unable to open");
+        exit(-1);
+    }
+
+    bitmapData = LoadBitmapFile(argv[2], &bitmapFileHeader, &bitmapInfoHeader);
+
+    stegaEncryptDecodeText(bitmapData, &bitmapInfoHeader, systemKey, textSizeInBytes, outputFile);
+
+}
+#endif

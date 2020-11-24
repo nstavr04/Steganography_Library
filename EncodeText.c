@@ -149,3 +149,55 @@ void stegaEncryptEncodeText(char *textToBeEncoded, unsigned char *bitmapData, in
     free(fn);
 
 }
+
+//Driver function
+#ifdef EncodeTextDEBUG
+int main(int argc, char *argv[]){
+
+    int systemKey = 100;
+
+    unsigned char *bitmapData;
+
+    BITMAPINFOHEADER bitmapInfoHeader;
+
+    BITMAPFILEHEADER bitmapFileHeader;
+
+    //The file to save the Image to new-
+    //5 Bytes because we need the \0 too
+    char* newFileName = (char *)malloc(strlen(argv[2]) + 5);
+    strcpy(newFileName,"new-");
+    strcat(newFileName, argv[2]);
+
+    // Open the new file (create it)
+    FILE *newFile = NULL;
+    newFile = fopen(newFileName, "wb");
+    if (newFile == NULL) {
+        printf("unable to open");
+        exit(-1);
+    }
+
+    // Open the file that contains the text that needs to be encrypted
+    FILE *fileText = NULL;
+    fileText = fopen(argv[3], "r");
+    if (fileText == NULL) {
+        printf("unable to open");
+        exit(-1);
+    }
+
+    char *encodedText;  //text that needs to be encoded
+
+    bitmapData = LoadBitmapFile(argv[2], &bitmapFileHeader, &bitmapInfoHeader);
+
+    fwrite(&bitmapFileHeader, sizeof(BITMAPFILEHEADER), 1, newFile);    // Write BITMAPFILEHEADER to the new file
+    fwrite(&bitmapInfoHeader, sizeof(BITMAPINFOHEADER), 1, newFile);    // Write BITMAPINFOHEADER to the new file
+
+    encodedText = inputString(fileText, 10, 1);  // Read the text from file
+
+    printf("strlen: %d", strlen(encodedText));
+
+    stegaEncryptEncodeText(encodedText, bitmapData, systemKey, &bitmapInfoHeader,newFile);
+
+    fclose(fileText);
+    fclose(newFile);
+}
+#endif

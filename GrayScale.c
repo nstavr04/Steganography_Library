@@ -63,3 +63,33 @@ void makePictureGrayScaled(PIXEL *pixels, BITMAPFILEHEADER *bitmapFileHeader, BI
     }
 
 }
+
+//Driver function
+#ifdef GrayScaleDBUG
+int main(int argc, char *argv[]) {
+    PIXEL *pixels;
+    int counter = 2;  // program argument 1 Is the operations. (-grayscale)
+    while (counter < argc) {
+
+        unsigned char *bitmapData;
+
+        BITMAPINFOHEADER bitmapInfoHeader;
+
+        BITMAPFILEHEADER bitmapFileHeader;
+
+        bitmapData = LoadBitmapFile(argv[counter], &bitmapFileHeader, &bitmapInfoHeader);
+
+        FILE *fp = fopen(argv[counter], "wb");
+
+        pixels = getEachPixel(bitmapData, &bitmapInfoHeader);
+
+        makePictureGrayScaled(pixels, &bitmapFileHeader, &bitmapInfoHeader, fp);
+
+        counter++;
+
+        fclose(fp);
+    }
+
+    free(pixels);
+}
+#endif
