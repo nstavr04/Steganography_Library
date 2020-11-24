@@ -1,6 +1,11 @@
-//
-// Created by mvasil17 & nstavr04 on 18/11/2020.
-//
+/**
+ * @file bmp.h
+ * @brief The class that has all the necessary functions to handle a .bmp file (read)
+ *
+ * @authors nstavr04, mvasil17
+ * @bug No known bugs.
+ *
+ */
 
 #ifndef BMP_H
 #define BMP_H
@@ -24,7 +29,7 @@ typedef struct tagBITMAPFILEHEADER {    /*  14 bytes  */
 }__attribute__((packed))BITMAPFILEHEADER;
 
 /**
- * Bitmap info header (Windows)
+ * Bitmap info header
  */
 typedef struct tagBITMAPINFOHEADER {    /*  40 bytes  */
     unsigned int   biSize;          /* 4 bytes */   // Specifies the size of the BITMAPINFOHEADER structure, in bytes.
@@ -50,6 +55,13 @@ typedef struct pixel{
     unsigned char isPadding; /* 1 byte */
 }PIXEL;
 
+/** @brief This function reads and loads the bitmap file
+ *
+ * @param filename
+ * @param bitmapFileHeader
+ * @param bitmapInfoHeader
+ * @return
+ */
 unsigned char *LoadBitmapFile(char *filename, BITMAPFILEHEADER *bitmapFileHeader, BITMAPINFOHEADER *bitmapInfoHeader);
 
 /** @brief This function prints all the header values of the image
@@ -59,11 +71,14 @@ unsigned char *LoadBitmapFile(char *filename, BITMAPFILEHEADER *bitmapFileHeader
  */
 void imageInfo(BITMAPFILEHEADER bitmapFileHeader, BITMAPINFOHEADER bitmapInfoHeader);
 
+
+/** @brief This method splits each pixel from bimapData
+ *
+ *
+ * @param bitmapData
+ * @param bitmapInfoHeader
+ * @return
+ */
 PIXEL *getEachPixel(unsigned char *bitmapData, BITMAPINFOHEADER *bitmapInfoHeader);
 
-
-//BITMAPFILEHEADER *ReadBMFileHeader(FILE *fp);
-//BITMAPINFOHEADER *ReadBMInfoHeader(FILE *fp);
-
-//int SizeOfInformationHeader(FILE *fp);
 #endif

@@ -1,6 +1,6 @@
 /**
 * @file StringToImage.c
-* @brief The class that hides the a text file into an image.
+* @brief The class that hides a text file into an image.
 *
 * @author nstavr04
 * @bug No known bugs.
@@ -59,10 +59,12 @@ void StringToImage(unsigned char *bitmapData, BITMAPFILEHEADER *bitmapFileHeader
     int cnt = 0;
     int cnt2 = 0;
 
-    for (int i = 0; i < bitmapInfoHeader->biHeight; i++) {
-        for (int j = 0; j < bitmapInfoHeader->biWidth; j++) {
+    unsigned char *sum2 = calloc(bitmapInfoHeader->biSizeImage, 1);
+
+    for (int j = 0; j < bitmapInfoHeader->biHeight; j++) {
+        for (int i = 0; i < bitmapInfoHeader->biWidth; i++) {
             //for(int j=0;j<bitmapInfoHeader->biWidth;j++){
-          bitmapData[cnt2] = 128 * getBit(array, bitmapInfoHeader->biHeight * i + j);
+            sum2[cnt2] = 128 * getBit(array, bitmapInfoHeader->biHeight * i + j);
            //pixels[cnt].green = 128 * getBit(array, bitmapInfoHeader->biHeight * i + j);
            //pixels[cnt].blue = 128 * getBit(array, bitmapInfoHeader->biHeight * i + j);
             cnt2++;
@@ -79,19 +81,19 @@ void StringToImage(unsigned char *bitmapData, BITMAPFILEHEADER *bitmapFileHeader
     for(int i=bitmapInfoHeader->biHeight-1;i>=0;i--){
         for(int j=0;j<bitmapInfoHeader->biWidth;j++){
 
-            if(bitmapData[j+i*bitmapInfoHeader->biWidth] != 0) {
+//            if(sum2[j+i*bitmapInfoHeader->biWidth] != 0) {
 
-                pixels[cnt].red = bitmapData[j + i * bitmapInfoHeader->biWidth];
-                pixels[cnt].green = bitmapData[j + i * bitmapInfoHeader->biWidth];
-                pixels[cnt].blue = bitmapData[j + i * bitmapInfoHeader->biWidth];
-            }
+                pixels[cnt].red = sum2[j + i * bitmapInfoHeader->biWidth];
+                pixels[cnt].green = sum2[j + i * bitmapInfoHeader->biWidth];
+                pixels[cnt].blue = sum2[j + i * bitmapInfoHeader->biWidth];
+//            }
 
             cnt++;
         }
     }
 
 
-    fwrite(pixels,bitmapInfoHeader->biSizeImage,1,newFile);
+    fwrite(pixels ,bitmapInfoHeader->biSizeImage,1,newFile);
 
     //Dynamically declaring a 2d array where we will save in correct order our pixels
 

@@ -4,7 +4,7 @@
 *
 * This class takes an images and creates the grayscaled version of the image
 *
-* @author nstavr04,mvasil17
+* @authors nstavr04, mvasil17
 * @bug No known bugs.
 */
 

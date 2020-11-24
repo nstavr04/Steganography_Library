@@ -1,6 +1,10 @@
-//
-// Created by mvasil17 on 19/11/2020.
-//
+/**
+* @file DecodeText.c
+* @brief The class that decodes an encrypted message from the image, back to its .txt format
+*
+* @author mvasil17
+* @bug No known bugs.
+*/
 
 #include "bmp.h"
 #include "bmplib.h"

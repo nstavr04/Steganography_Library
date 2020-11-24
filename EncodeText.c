@@ -1,6 +1,11 @@
-//
-// Created by 35799 on 19/11/2020.
-//
+/**
+* @file EncodeText.c
+* @brief The class that hides a text file into an image.
+*
+* @author mvasil17
+* @bug No known bugs.
+*/
+
 
 #include "bmp.h"
 #include "bmplib.h"
@@ -45,6 +50,7 @@ int *createPermutationFunction(int N, unsigned int systemkey) {
     srand(systemkey);
 
     int *permutation = malloc(sizeof(int) * N);
+
     if (!permutation){
         printf("Not enough memory space to allocate");
         exit(-1);

@@ -2,7 +2,7 @@
 * @file bmplib.h
 * @brief The header file is used to connect all .c .bmp image manipulation functions together into one library
 *
-* @author nstavr04,mvasil17
+* @author nstavr04, mvasil17
 * @bug No known bugs.
 */
 
@@ -28,8 +28,8 @@ void imageInfo(BITMAPFILEHEADER bitmapFileHeader, BITMAPINFOHEADER bitmapInfoHea
  */
 void makePictureGrayScaled(PIXEL *pixels, BITMAPFILEHEADER *bitmapFileHeader, BITMAPINFOHEADER *bitmapInfoHeader, FILE *fp);
 
-/**
- * @brief This function encodes (hides) an image inside another image using its 1-4 msb
+
+/** @brief This function encodes (hides) an image inside another image using its 1-4 msb
  *
  * @param imagePixels The structure of the pixels of the image we want to hide
  * @param pixels The structure of the pixels of the other image , the visible one
@@ -40,8 +40,8 @@ void makePictureGrayScaled(PIXEL *pixels, BITMAPFILEHEADER *bitmapFileHeader, BI
  */
 void encodeStegano(PIXEL *imagePixels,PIXEL *pixels, BITMAPFILEHEADER *bitmapFileHeader, BITMAPINFOHEADER *bitmapInfoHeader, FILE *fp,char *nbBits);
 
-/**
- * @brief This function decodes the hidden image from another image. We need to use the encodeStegano first if we want to decode.
+
+/** @brief This function decodes the hidden image from another image. We need to use the encodeStegano first if we want to decode.
  *
  * @param pixels The structure of the pixels of the current image
  * @param SecretFileHeader the bitmap file header
@@ -50,6 +50,7 @@ void encodeStegano(PIXEL *imagePixels,PIXEL *pixels, BITMAPFILEHEADER *bitmapFil
  * @param nbBits how many lsb of this image will be removed to be used as the msb of our hidden image, to reveal it. Needs to be the same as the amount of bits we hid in encoding
  */
 void decodeStegano(PIXEL *pixels, BITMAPFILEHEADER *SecretFileHeader, BITMAPINFOHEADER *SecretInfoHeader, FILE *fp,char *nbBits);
+
 
 /** @brief This function reads the file *fp.
  *
@@ -65,8 +66,8 @@ void decodeStegano(PIXEL *pixels, BITMAPFILEHEADER *SecretFileHeader, BITMAPINFO
  */
 char *inputString(FILE *fp, size_t size, int flag);
 
-/**
- * @brief get n bit content from message m
+
+/** @brief get n bit content from message m
  *
  * @param m pointer to the message
  * @param n which bit content to return
@@ -74,8 +75,8 @@ char *inputString(FILE *fp, size_t size, int flag);
  */
 int getBit(unsigned char *m, int n);
 
-/**
- * @brief
+
+/** @brief This function encodes(hides) a text inside a .bmp picture.
  *
  * @param textToBeEncoded
  * @param bitmapData
@@ -84,12 +85,26 @@ int getBit(unsigned char *m, int n);
  */
 void stegaEncryptEncodeText(char *textToBeEncoded, unsigned char *bitmapData, int systemKey, BITMAPINFOHEADER *bitmapInfoHeader, FILE *newFile);
 
+/** @brief This function decodes the hidden text inside a .bmp picture and makes back to its .txt format
+ *
+ * @param bitmapData
+ * @param bitmapInfoHeader
+ * @param systemKey
+ * @param length
+ * @param outputFile
+ */
 void stegaEncryptDecodeText(unsigned char *bitmapData, BITMAPINFOHEADER *bitmapInfoHeader, int systemKey, int length, FILE *outputFile);
 
+
+/** @brief This function creates pseudorandom permutations using a system-key integer
+ *
+ * @param N
+ * @param systemkey
+ * @return
+ */
 int *createPermutationFunction(int N, unsigned int systemkey);
 
-/**
- * @brief This function reads a text file and encodes it into an image creating a black and grey image.
+/** @brief This function reads a text file and encodes it into an image creating a black and grey image.
  *
  * If the text file is larger than the size of the image we will ignore the characters when the image is full.
  * If the text file is smaller than the size of the image, the remaining pixels will be black

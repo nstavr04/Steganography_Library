@@ -1,22 +1,10 @@
-//
-// Created by mvasil17 & nstavr04 on 18/11/2020.
-//
 
 #include "bmp.h"
 
-/** @brief This function reads and loads the bitmap file
- *
- * @param filename
- * @param bitmapFileHeader
- * @param bitmapInfoHeader
- * @return
- */
 unsigned char *LoadBitmapFile(char *filename, BITMAPFILEHEADER *bitmapFileHeader, BITMAPINFOHEADER *bitmapInfoHeader) {
     FILE *filePtr; //our file pointer
     //BITMAPFILEHEADER bitmapFileHeader; //our bitmap file header
     unsigned char *bitmapImage;  //store image data
-    int imageIdx = 0;  //image index counter
-//    unsigned char tempRGB;  //our swap variable
 
     //open filename in read binary mode
     filePtr = fopen(filename, "rb");
@@ -35,9 +23,6 @@ unsigned char *LoadBitmapFile(char *filename, BITMAPFILEHEADER *bitmapFileHeader
 
     //read the bitmap info header
     fread(bitmapInfoHeader, sizeof(BITMAPINFOHEADER), 1, filePtr);
-
-//    //move file point to the begging of bitmap data
-//    fseek(filePtr, bitmapFileHeader->bfOffBits, SEEK_SET);
 
     //allocate enough memory for the bitmap image data
     bitmapImage = (unsigned char *) malloc(bitmapInfoHeader->biSizeImage);
@@ -58,26 +43,12 @@ unsigned char *LoadBitmapFile(char *filename, BITMAPFILEHEADER *bitmapFileHeader
         return NULL;
     }
 
-    //swap the r and b values to get RGB (bitmap is BGR)
-//    for (imageIdx = 0;imageIdx < bitmapInfoHeader->biSizeImage;imageIdx+=3) // fixed semicolon
-//    {
-//        tempRGB = bitmapImage[imageIdx];
-//        bitmapImage[imageIdx] = bitmapImage[imageIdx + 2];
-//        bitmapImage[imageIdx + 2] = tempRGB;
-//    }
-
     //close file and return bitmap image data
     fclose(filePtr);
     return bitmapImage;
 }
 
-/** @brief This method splits each pixel from bimapData
- *
- *
- * @param bitmapData
- * @param bitmapInfoHeader
- * @return
- */
+
 PIXEL *getEachPixel(unsigned char *bitmapData, BITMAPINFOHEADER *bitmapInfoHeader) {
 
     int numOfEachLinePadding;

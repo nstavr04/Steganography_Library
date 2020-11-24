@@ -5,7 +5,7 @@
 * This class is the main class of our program which we will execute with the appropriate -option every time
  * accordingly to how we want to manipulate an image
 *
-* @author nstavr04,mvasil17
+* @authors nstavr04,mvasil17
 * @bug No known bugs.
 */
 
@@ -178,6 +178,8 @@ int main(int argc, char *argv[]) {
         fwrite(&bitmapInfoHeader, sizeof(BITMAPINFOHEADER), 1, newFile);    // Write BITMAPINFOHEADER to the new file
 
         encodedText = inputString(fileText, 10, 1);  // Read the text from file
+
+        printf("strlen: %d", strlen(encodedText));
 
         stegaEncryptEncodeText(encodedText, bitmapData, systemKey, &bitmapInfoHeader,newFile);
 
