@@ -134,13 +134,11 @@ void stegaEncryptEncodeText(char *textToBeEncoded, unsigned char *bitmapData, in
             printf("In encodeText -> stega_encrypt, b should be 0 or 1 and its value is: %d\n", b);
         }
 
-//        unsigned char b2 = (bitmapData[o] & 254);
-//        b2=b|b2;
-//        bitmapData[o]=b2;
+
     }
 
     fwrite(bitmapData, bitmapInfoHeader->biSizeImage, 1, newFile);
 
     free(fn);
-//    free(Un);
+
 }

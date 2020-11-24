@@ -18,7 +18,6 @@
  */
 void setNewLuminance(PIXEL *pixel){
     unsigned char newLuminance;
-
     newLuminance = (unsigned char)(round(pixel->red*0.299 + pixel->green*0.587 + pixel->blue*0.114));
 
     pixel->red = newLuminance;
@@ -39,6 +38,10 @@ void makePictureGrayScaled(PIXEL *pixels, BITMAPFILEHEADER *bitmapFileHeader, BI
     for (int i = 0; i < ((bitmapInfoHeader->biSizeImage)/3); i++) {    // for each pixel
         setNewLuminance(&pixels[i]);
     }
+
+    printf("BITMAPFILEHEADER SIZE SHOULD BE (14) AND IT IS: %llu\n", sizeof(BITMAPFILEHEADER));
+    printf("BITMAPINFOHEADER SIZE SHOULD BE (40) AND IT IS: %llu\n", sizeof(BITMAPINFOHEADER));
+
 
     fwrite(bitmapFileHeader, sizeof(BITMAPFILEHEADER), 1, fp);
     fwrite(bitmapInfoHeader, sizeof(BITMAPINFOHEADER), 1, fp);

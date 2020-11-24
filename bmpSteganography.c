@@ -26,7 +26,7 @@ int main(int argc, char *argv[]) {
 
     BITMAPINFOHEADER secretInfoHeader;
 
-    BITMAPFILEHEADER  secretFileHeader;
+    BITMAPFILEHEADER secretFileHeader;
 
     int systemKey;
     systemKey = 100;
