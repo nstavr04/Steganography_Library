@@ -51,49 +51,62 @@ void ImageToString(unsigned char *bitmapData, BITMAPFILEHEADER *bitmapFileHeader
 
     PIXEL *pixels;
     pixels = getEachPixel(bitmapData,bitmapInfoHeader);
-
-        PIXEL **pixels2D = (PIXEL **)malloc(bitmapInfoHeader->biHeight * sizeof(PIXEL *));
-    for(int i=0;i<bitmapInfoHeader->biHeight;i++){
-        pixels2D[i] = (PIXEL *)malloc(bitmapInfoHeader->biWidth * sizeof(PIXEL));
-    }
-
-
-//    int curPos = 0;
-
-//    int k=0;
-
-    for(int i=0;i<bitmapInfoHeader->biHeight;i++){
-        for(int j=0;j<bitmapInfoHeader->biWidth;j++){
-
-
-            pixels2D[i][j].red = (pixels[bitmapInfoHeader->biHeight*i + j].red)/128;
-
-//            number1 = pixels->red >> curPos;
 //
-//            curPos++;
+//        PIXEL **pixels2D = (PIXEL **)malloc(bitmapInfoHeader->biHeight * sizeof(PIXEL *));
+//    for(int i=0;i<bitmapInfoHeader->biHeight;i++){
+//        pixels2D[i] = (PIXEL *)malloc(bitmapInfoHeader->biWidth * sizeof(PIXEL));
+//    }
+
+//   int k=0;
+
+//    for(int j=0;j<bitmapInfoHeader->biWidth;j++){
+//        for(int i=0;i<bitmapInfoHeader->biHeight;i++){
 //
-//            //Create each char by adding the 8 pixels of the image
-//            curChar += number1;
 //
-//            if(curPos == 7) {
-//                curPos = 0;
-//                //3 because rgb is 3 bytes
-//                fprintf(fp,"%c",curChar);
-//            }
-
-        }
-
-    }
-
+//           // pixels2D[i][j].red = (pixels[k].red)/128;
+//           // k++;
+//
+//            pixels2D[i][j].red = (pixels[bitmapInfoHeader->biHeight*j + i].red)/128;
+//
+//        }
+//
+//    }
 
 
 
-    char curChar2 = 0x00;
-    char curCharTemp;
+
+
+    unsigned char curChar2 = 0x00;
+    unsigned char curCharTemp;
     int cnt = 0;
+
+//    for(int i=0;i<bitmapInfoHeader->biHeight;i++) {
+//        for (int j = 0; j < bitmapInfoHeader->biWidth; j++) {
+//
+//            if(cnt == 8){
+//                cnt=0;
+//                fprintf(fp,"%c",curChar2);
+//                curChar2 = 0x00;
+//            }
+//
+//
+//            curCharTemp = pixels2D[i][j].red;
+//
+//            curChar2 = (curChar2 << 1) | curCharTemp;
+//
+//            cnt++;
+//
+//        }
+//    }
 
     for(int i=0;i<bitmapInfoHeader->biWidth;i++) {
         for (int j = 0; j < bitmapInfoHeader->biHeight; j++) {
+
+            curCharTemp = ((pixels + (bitmapInfoHeader->biHeight - j - 1)*bitmapInfoHeader->biWidth + i)->red) / 128;
+
+            curChar2 = (curChar2 << 1) | curCharTemp;
+
+            cnt++;
 
             if(cnt == 8){
                 cnt=0;
@@ -101,17 +114,11 @@ void ImageToString(unsigned char *bitmapData, BITMAPFILEHEADER *bitmapFileHeader
                 curChar2 = 0x00;
             }
 
-
-            curCharTemp = pixels2D[i][j].red;
-
-            curChar2 = (curChar2 << 1) | curCharTemp;
-
-            cnt++;
-
         }
     }
 
-
+    fprintf(fp,"%c",'\0');
+    fclose(fp);
 
 
 
