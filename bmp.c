@@ -58,7 +58,7 @@ PIXEL *getEachPixel(unsigned char *bitmapData, BITMAPINFOHEADER *bitmapInfoHeade
         numOfEachLinePadding = (bitmapInfoHeader->biWidth)*3%4;
     }
 
-    PIXEL *pixels = malloc(sizeof(PIXEL) * ((bitmapInfoHeader->biSizeImage)/3));    //each pixel is 3 bytes
+    PIXEL *pixels = (PIXEL *)malloc(sizeof(PIXEL) * ((bitmapInfoHeader->biSizeImage)/3));    //each pixel is 3 bytes
     if (!pixels){
         printf("Unable to allocate memory");
         exit(-1);

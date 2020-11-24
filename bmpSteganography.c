@@ -101,7 +101,7 @@ int main(int argc, char *argv[]) {
 
             //The file to save the Image to new-
             //5 Bytes because we need the \0 too
-            char* newFile = malloc(strlen(argv[3]) + 5);
+            char* newFile = (char *)malloc(strlen(argv[3]) + 5);
             strcpy(newFile,"new-");
             strcat(newFile, argv[3]);
 
@@ -134,7 +134,7 @@ int main(int argc, char *argv[]) {
 
         //The file to save the Image to new-
         //5 Bytes because we need the \0 too
-        char* newFile = malloc(strlen(argv[3]) + 5);
+        char* newFile = (char *)malloc(strlen(argv[3]) + 5);
         strcpy(newFile,"new-");
         strcat(newFile, argv[3]);
 
@@ -153,7 +153,7 @@ int main(int argc, char *argv[]) {
 
         //The file to save the Image to new-
         //5 Bytes because we need the \0 too
-        char* newFileName = malloc(strlen(argv[2]) + 5);
+        char* newFileName = (char *)malloc(strlen(argv[2]) + 5);
         strcpy(newFileName,"new-");
         strcat(newFileName, argv[2]);
 
@@ -212,7 +212,7 @@ int main(int argc, char *argv[]) {
     } else if (strcmp(argv[1], "-stringToImage") == 0) {    //Operation 7
         //The file to save the Image to new-
         //5 Bytes because we need the \0 too
-        char* newFileName = malloc(strlen(argv[2]) + 5);
+        char* newFileName = (char *)malloc(strlen(argv[2]) + 5);
         strcpy(newFileName,"new-");
         strcat(newFileName, argv[2]);
 
@@ -248,7 +248,7 @@ int main(int argc, char *argv[]) {
         //Freeing all the image pixels and allocating the memory with 0
         free(bitmapData);
 
-        bitmapData = calloc(bitmapInfoHeader.biSizeImage,sizeof(unsigned  char));
+        bitmapData = (unsigned char *)calloc(bitmapInfoHeader.biSizeImage,sizeof(unsigned  char));
 
         StringToImage(bitmapData, &bitmapFileHeader, &bitmapInfoHeader,newFile,argv[3],cnt);
 

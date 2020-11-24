@@ -49,7 +49,7 @@ int *createPermutationFunction(int N, unsigned int systemkey) {
 
     srand(systemkey);
 
-    int *permutation = malloc(sizeof(int) * N);
+    int *permutation = (int *)malloc(sizeof(int) * N);
 
     if (!permutation){
         printf("Not enough memory space to allocate");
