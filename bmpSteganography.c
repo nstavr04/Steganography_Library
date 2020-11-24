@@ -246,7 +246,7 @@ int main(int argc, char *argv[]) {
         //Freeing all the image pixels and allocating the memory with 0
         free(bitmapData);
 
-        bitmapData = calloc(sizeof(unsigned  char),bitmapInfoHeader.biSizeImage);
+        bitmapData = calloc(bitmapInfoHeader.biSizeImage,sizeof(unsigned  char));
 
         //fwrite(&bitmapFileHeader, sizeof(BITMAPFILEHEADER), 1, newFile);    // Write BITMAPFILEHEADER to the new file
         //fwrite(&bitmapInfoHeader, sizeof(BITMAPINFOHEADER), 1, newFile);
