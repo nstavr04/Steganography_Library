@@ -45,6 +45,12 @@ void StringToImage(unsigned char *bitmapData, BITMAPFILEHEADER *bitmapFileHeader
 #ifdef StringToImageDEBUG
 int main(int argc, char *argv[]){
 
+    unsigned char *bitmapData;
+
+    BITMAPINFOHEADER bitmapInfoHeader;
+
+    BITMAPFILEHEADER bitmapFileHeader;
+
     //The file to save the Image to new-
     //5 Bytes because we need the \0 too
     char* newFileName = (char *)malloc(strlen(argv[2]) + 5);
