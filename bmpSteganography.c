@@ -265,6 +265,8 @@ int main(int argc, char *argv[]) {
 
         StringToImage(bitmapData, &bitmapFileHeader, &bitmapInfoHeader,newFile,argv[3],cnt);
 
+        free(newFileName);
+
     } else if (strcmp(argv[1], "-imageToString") == 0) { //Operation 8
 
         //Save the data of the image in bitmapData

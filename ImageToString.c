@@ -56,6 +56,9 @@ void ImageToString(unsigned char *bitmapData, BITMAPFILEHEADER *bitmapFileHeader
 
     }
 
+    fclose(fp);
+
+
 }
 
 #ifdef ImageToStringDEBUG
