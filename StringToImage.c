@@ -38,6 +38,8 @@ void StringToImage(unsigned char *bitmapData, BITMAPFILEHEADER *bitmapFileHeader
         }
 
     fwrite(bitmapData, bitmapInfoHeader->biSizeImage, 1, newFile);
+    free(array);
+    fclose(fileText);
 
 }
 
