@@ -37,7 +37,8 @@ void stegaEncryptDecodeText(unsigned char *bitmapData, BITMAPINFOHEADER *bitmapI
 
         if (counter == 0) {
             counter = 7;
-            fprintf(outputFile, "%c", oneChar);
+            if(oneChar != '\0')
+                fprintf(outputFile, "%c", oneChar);
             oneChar = 0;
         } else {
             counter--;

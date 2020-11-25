@@ -23,6 +23,9 @@ unsigned char *LoadBitmapFile(char *filename, BITMAPFILEHEADER *bitmapFileHeader
     if (filePtr == NULL)
         return NULL;
 
+    printf("%llu",sizeof(BITMAPINFOHEADER));
+    printf("%llu",sizeof(BITMAPFILEHEADER));
+
     //read the bitmap file header
     fread(bitmapFileHeader, sizeof(BITMAPFILEHEADER), 1, filePtr);
 

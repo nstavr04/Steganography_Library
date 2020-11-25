@@ -24,7 +24,7 @@ char *inputString(FILE *fp, size_t size, int flag) {       //size_t = size of 'o
     char *str;
     int ch;
     size_t len = 0;
-    str = realloc(NULL, sizeof(char) * size);//size is start size
+    str = malloc(sizeof(char) * size);//size is start size
     if (!str)
         return str;
     if (flag == 0) {

@@ -24,25 +24,25 @@ typedef struct tagBITMAPFILEHEADER {    /*  14 bytes  */
     unsigned int   bfSize;       /* 4 bytes */  // specifies the size in bytes of the bitmap file
     unsigned short bfReserved1;  /* 2 bytes */  // reserved; must be 0
     unsigned short bfReserved2;  /* 2 bytes */  // reserved; must be 0
-    unsigned long  bfOffBits;    /* 4 bytes */  // species the offset in bytes from the bitmapfileheader to the bitmap bits
-}__attribute__((packed))BITMAPFILEHEADER;
+    unsigned int  bfOffBits;    /* 4 bytes */  // species the offset in bytes from the bitmapfileheader to the bitmap bits
+}__attribute__((__packed__))BITMAPFILEHEADER;
 
 /**
  * Bitmap info header
  */
 typedef struct tagBITMAPINFOHEADER {    /*  40 bytes  */
     unsigned int   biSize;          /* 4 bytes */   // Specifies the size of the BITMAPINFOHEADER structure, in bytes.
-    long           biWidth;         /* 4 bytes */   // Specifies the width of the image, in pixels.
-    long           biHeight;        /* 4 bytes */   // Specifies the height of the image, in pixels.
+    int           biWidth;         /* 4 bytes */   // Specifies the width of the image, in pixels.
+    int           biHeight;        /* 4 bytes */   // Specifies the height of the image, in pixels.
     unsigned short biPlanes;        /* 2 bytes */   // Specifies the number of planes of the target device, usually set to zero.
     unsigned short biBitCount;      /* 2 bytes */   // Specifies the number of bits per pixel.
     unsigned int   biCompression;   /* 4 bytes */   // Specifies the type of compression, usually set to zero (no compression). Need to provide an error if image is compressed.
     unsigned int   biSizeImage;     /* 4 bytes */   // Specifies the size of the image data, in bytes. If there is no compression, it is valid to set this member to zero.
-    long           biXPixPerMeter;  /* 4 bytes */   // Specifies the horizontal pixels per meter on the designated target device, usually set to zero.
-    long           biYPixPerMeter;  /* 4 bytes */   // Specifies the vertical pixels per meter on the designated target device, usually set to zero.
-    unsigned long  biClrUsed;       /* 4 bytes */   // Specifies the number of colors used in the bitmap, if set to zero the number of colors is calculated using the biBitCount member.
-    unsigned long  biClrImportant;  /* 4 bytes */   // Specifies the number of color that are 'important' for the bitmap, if set to zero, all colors are important.
-} __attribute__((packed))BITMAPINFOHEADER;
+    int           biXPixPerMeter;  /* 4 bytes */   // Specifies the horizontal pixels per meter on the designated target device, usually set to zero.
+    int           biYPixPerMeter;  /* 4 bytes */   // Specifies the vertical pixels per meter on the designated target device, usually set to zero.
+    unsigned int  biClrUsed;       /* 4 bytes */   // Specifies the number of colors used in the bitmap, if set to zero the number of colors is calculated using the biBitCount member.
+    unsigned int  biClrImportant;  /* 4 bytes */   // Specifies the number of color that are 'important' for the bitmap, if set to zero, all colors are important.
+} __attribute__((__packed__))BITMAPINFOHEADER;
 
 /**
  * Bitmap pixel. (isPadding byte is just to make sure that this is a pixel or a padding)
