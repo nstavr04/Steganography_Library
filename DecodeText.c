@@ -44,6 +44,9 @@ void stegaEncryptDecodeText(unsigned char *bitmapData, BITMAPINFOHEADER *bitmapI
             counter--;
         }
     }
+
+    free(fn);
+
 }
 
 //Driver function

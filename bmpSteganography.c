@@ -220,6 +220,8 @@ int main(int argc, char *argv[]) {
 
         stegaEncryptDecodeText(bitmapData, &bitmapInfoHeader, systemKey, textSizeInBytes, outputFile);
 
+        fclose(outputFile);
+
     } else if (strcmp(argv[1], "-stringToImage") == 0) {    //Operation 7
         //The file to save the Image to new-
         //5 Bytes because we need the \0 too
