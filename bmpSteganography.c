@@ -195,7 +195,8 @@ int main(int argc, char *argv[]) {
         printf("strlen: %d", strlen(encodedText));
 
         stegaEncryptEncodeText(encodedText, bitmapData, systemKey, &bitmapInfoHeader,newFile);
-
+        free(newFileName);
+        free(encodedText);
     fclose(fileText);
     fclose(newFile);
 
