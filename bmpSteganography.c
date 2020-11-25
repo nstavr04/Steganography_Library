@@ -125,6 +125,7 @@ int main(int argc, char *argv[]) {
         free(pixels);
         free(imagePixels);
         free(newFile);
+        free(secretImage);
 
         fclose(fp);
 
