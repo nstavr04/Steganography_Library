@@ -5,6 +5,16 @@
 * License.
 */
 
+/**
+* @file Negative.c
+* @brief The class that filters an image with the negative filter
+*
+* This class takes a 24 bit .bmp image and applies the negative filter
+*
+* @author nstavr04,mvasil17
+* @bug No known bugs.
+*/
+
 #include "bmp.h"
 #include "bmplib.h"
 

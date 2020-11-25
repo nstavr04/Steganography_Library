@@ -5,17 +5,17 @@
 * License.
 */
 
+/**
+* @file DecodeStegano.c
+* @brief The class that unhides an image that is hidden in another image
+*
+* @author nstavr04
+* @bug No known bugs.
+*/
+
 #include "bmp.h"
 #include "bmplib.h"
 
-/**
- *
- * @param pixels
- * @param SecretFileHeader
- * @param SecretInfoHeader
- * @param fp
- * @param nbBits
- */
 void decodeStegano(PIXEL *pixels, BITMAPFILEHEADER *SecretFileHeader, BITMAPINFOHEADER *SecretInfoHeader, FILE *fp,char *nbBits) {
 
     fwrite(SecretFileHeader, sizeof(BITMAPFILEHEADER), 1, fp);

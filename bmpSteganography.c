@@ -13,7 +13,7 @@
  * accordingly to how we want to manipulate an image
 *
 * @authors nstavr04,mvasil17
-* @bug Only runs on windows. Working for an update to work on Linux as well.
+* @bug No known bugs
 */
 
 #include "bmp.h"

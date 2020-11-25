@@ -32,14 +32,6 @@ void setNewLuminance(PIXEL *pixel){
     pixel->green = newLuminance;
 }
 
-/**
- * @brief The function used to create the greyscaled image with the help of a function that calculates the luminance
- *
- * @param pixels The pixel structure of the image
- * @param bitmapFileHeader the file header of the image
- * @param bitmapInfoHeader  the info header of the image
- * @param fp the file pointer, used to save the image into the new file
- */
 void makePictureGrayScaled(PIXEL *pixels, BITMAPFILEHEADER *bitmapFileHeader, BITMAPINFOHEADER *bitmapInfoHeader, FILE *fp){
 
     for (int i = 0; i < ((bitmapInfoHeader->biSizeImage)/3); i++) {    // for each pixel

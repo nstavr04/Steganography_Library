@@ -19,16 +19,6 @@
 #include "bmp.h"
 #include "bmplib.h"
 
-/**
- * @The function of the class used to encode our image into another image
- *
- * @param imagePixels the pixels of the secret image we want to hide
- * @param pixels the pixels of the visible image
- * @param SecretFileHeader the file header of the image (both have the same headers)
- * @param SecretInfoHeader the info header of the image (both have the same headers)
- * @param fp the file pointer to the new image we will create that will have the secret image encoded
- * @param nbBits the amount of msb bits of the secret image that we want to hide (1-4)
- */
 void encodeStegano(PIXEL *imagePixels,PIXEL *pixels, BITMAPFILEHEADER *SecretFileHeader, BITMAPINFOHEADER *SecretInfoHeader, FILE *fp,char *nbBits){
 
     fwrite(SecretFileHeader, sizeof(BITMAPFILEHEADER), 1, fp);
