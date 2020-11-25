@@ -46,10 +46,6 @@ void makePictureGrayScaled(PIXEL *pixels, BITMAPFILEHEADER *bitmapFileHeader, BI
         setNewLuminance(&pixels[i]);
     }
 
-    printf("BITMAPFILEHEADER SIZE SHOULD BE (14) AND IT IS: %llu\n", sizeof(BITMAPFILEHEADER));
-    printf("BITMAPINFOHEADER SIZE SHOULD BE (40) AND IT IS: %llu\n", sizeof(BITMAPINFOHEADER));
-
-
     fwrite(bitmapFileHeader, sizeof(BITMAPFILEHEADER), 1, fp);
     fwrite(bitmapInfoHeader, sizeof(BITMAPINFOHEADER), 1, fp);
 
