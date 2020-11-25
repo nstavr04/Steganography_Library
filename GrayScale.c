@@ -46,9 +46,6 @@ void makePictureGrayScaled(PIXEL *pixels, BITMAPFILEHEADER *bitmapFileHeader, BI
         setNewLuminance(&pixels[i]);
     }
 
-    fwrite(bitmapFileHeader, sizeof(BITMAPFILEHEADER), 1, fp);
-    fwrite(bitmapInfoHeader, sizeof(BITMAPINFOHEADER), 1, fp);
-
     // We cant use fwrite because our structure PIXEL has 4 bytes instead of 3 for the RGB
     for (int i = 0; i < ((bitmapInfoHeader->biSizeImage)/3); i++){
 
