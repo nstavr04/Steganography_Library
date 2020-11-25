@@ -52,9 +52,14 @@ void imageInfo(BITMAPFILEHEADER bitmapFileHeader, BITMAPINFOHEADER bitmapInfoHea
 
 }
 //Driver function
-//#ifdef ListDEBUG
+#ifdef ListDEBUG
 int main(int argc, char *argv[]) {
 
+    unsigned char *bitmapData;
+
+    BITMAPINFOHEADER bitmapInfoHeader;
+
+    BITMAPFILEHEADER bitmapFileHeader;
 
 
     int counter = 2;  // program argument 1 Is the operations. (-list)
@@ -71,4 +76,4 @@ int main(int argc, char *argv[]) {
         }
 
 }
-//#endif
+#endif
