@@ -96,29 +96,6 @@ int getBit(unsigned char *m,int n){
 //encription of message
 void stegaEncryptEncodeText(char *textToBeEncoded, unsigned char *bitmapData, int systemKey, BITMAPINFOHEADER *bitmapInfoHeader, FILE *newFile) {
 
-//    char *Un = malloc((strlen(textToBeEncoded)+1) * sizeof(char) * 8);
-//    int n = 0;
-//
-//    while (*(textToBeEncoded+n/8) != '\0') {
-//
-//        if (getBit(textToBeEncoded, n) == 1) {
-//            Un[n] = '1';
-//        } else {   //getBit == 0
-//            Un[n] = '0';
-//        }
-//        n++;
-//    }
-//    //add manually the '\0' character (10 at decimal)
-//    Un[n++]='0';
-//    Un[n++]='0';
-//    Un[n++]='0';
-//    Un[n++]='0';
-//    Un[n++]='1';
-//    Un[n++]='0';
-//    Un[n++]='1';
-//    Un[n]='0';
-
-
     int *fn;
 
     fn = createPermutationFunction(bitmapInfoHeader->biSizeImage, systemKey);    // system-key-integer
