@@ -124,8 +124,8 @@ void stegaEncryptEncodeText(char *textToBeEncoded, unsigned char *bitmapData, in
     fwrite(bitmapData, bitmapInfoHeader->biSizeImage, 1, newFile);
 
     free(fn);
-    free(bitmapData);
-    free(textToBeEncoded);
+    //free(bitmapData);
+    //free(textToBeEncoded);
 
 }
 
