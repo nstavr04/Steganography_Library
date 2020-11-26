@@ -124,7 +124,9 @@ void StringToImage(unsigned char *bitmapData, BITMAPFILEHEADER *bitmapFileHeader
  */
 void ImageToString(unsigned char *bitmapData, BITMAPFILEHEADER *bitmapFileHeader, BITMAPINFOHEADER *bitmapInfoHeader);
 
-/** @brief This function is used to encrypt a message into a .bmp image
+/** @brief This function converts a given picture to its 'negative' one
+ *
+ * By Negative filter we mean that all the r g b colors are changed
  *
  * @param pixels the table with all the pixels of the image
  * @param bitmapFileHeader the bitmap file header
