@@ -76,7 +76,6 @@ int *createPermutationFunction(int N, unsigned int systemkey) {
         temp = *(permutation + i);
         *(permutation + i) = *(permutation + j);
         *(permutation + j) = temp;
-
     }
 
     return permutation;
@@ -124,8 +123,6 @@ void stegaEncryptEncodeText(char *textToBeEncoded, unsigned char *bitmapData, in
     fwrite(bitmapData, bitmapInfoHeader->biSizeImage, 1, newFile);
 
     free(fn);
-    //free(bitmapData);
-    //free(textToBeEncoded);
 
 }
 

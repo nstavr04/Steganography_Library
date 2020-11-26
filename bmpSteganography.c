@@ -45,7 +45,13 @@ int main(int argc, char *argv[]) {
     int flag = 0;
 
     if (argc < 3) {
-        printf("Wrong input");
+        printf("/* Copyright (C) 2020 nstavr04 mvasil17\n"
+                "* This is free software; you can redistribute it and/or\n"
+                "* modify it under the terms of the GNU General Public\n"
+                "* License.\n"
+                "*/\n\n");
+        printf("Wrong input\n");
+        flag = 1;
         return 0;
     }
 
@@ -101,6 +107,13 @@ int main(int argc, char *argv[]) {
 
             //Save the data of the secret Image
             secretImage = LoadBitmapFile(argv[4], &secretFileHeader, &secretInfoHeader);
+
+            if (bitmapInfoHeader.biHeight != secretInfoHeader.biHeight || bitmapInfoHeader.biWidth != bitmapInfoHeader.biHeight){
+                free(bitmapData);
+                free(secretImage);
+                printf("For this operation you have to enter 2 images with the same dimensions");
+                exit(-1);
+            }
 
             //Checking that the images have the same dimentions
             if(bitmapInfoHeader.biWidth != secretInfoHeader.biWidth && bitmapInfoHeader.biHeight != secretInfoHeader.biHeight){
@@ -192,7 +205,12 @@ int main(int argc, char *argv[]) {
 
         encodedText = inputString(fileText, 10, 1);  // Read the text from file
 
-        printf("strlen: %d", strlen(encodedText));
+        printf("strlen: %d\n", strlen(encodedText));
+
+        if ((strlen(encodedText)*8)+1 > bitmapInfoHeader.biSizeImage){
+            printf("This message does not fit in this image!\n");
+            exit(-1);
+        }
 
         stegaEncryptEncodeText(encodedText, bitmapData, systemKey, &bitmapInfoHeader,newFile);
         free(newFileName);
@@ -282,9 +300,14 @@ int main(int argc, char *argv[]) {
         int counter = 2;  // program argument 1 Is the operations. (-negativeFilter)
         while (counter < argc) {
 
-            bitmapData = LoadBitmapFile(argv[counter], &bitmapFileHeader, &bitmapInfoHeader);
 
             FILE *fp = fopen(argv[counter], "wb");
+            if (fp == NULL) {
+                printf("unable to open");
+                exit(-1);
+            }
+
+            bitmapData = LoadBitmapFile(argv[counter], &bitmapFileHeader, &bitmapInfoHeader);
 
             pixels = getEachPixel(bitmapData, &bitmapInfoHeader);
 
@@ -298,7 +321,12 @@ int main(int argc, char *argv[]) {
 
     }
     else{
-        printf("Wrong -option input");
+        printf("/* Copyright (C) 2020 nstavr04 mvasil17\n"
+               "* This is free software; you can redistribute it and/or\n"
+               "* modify it under the terms of the GNU General Public\n"
+               "* License.\n"
+               "*/\n\n");
+        printf("Wrong input\n");
         flag = 1;
         exit(-1);
     }

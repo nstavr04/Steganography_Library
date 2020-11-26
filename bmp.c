@@ -20,8 +20,11 @@ unsigned char *LoadBitmapFile(char *filename, BITMAPFILEHEADER *bitmapFileHeader
 
     //open filename in read binary mode
     filePtr = fopen(filename, "rb");
-    if (filePtr == NULL)
-        return NULL;
+    if (filePtr == NULL){
+        printf("Unable to open");
+        exit(-1);
+    }
+
 
     //read the bitmap file header
     fread(bitmapFileHeader, sizeof(BITMAPFILEHEADER), 1, filePtr);
@@ -30,11 +33,23 @@ unsigned char *LoadBitmapFile(char *filename, BITMAPFILEHEADER *bitmapFileHeader
     if ((bitmapFileHeader->bfType1) != 0x42 || (bitmapFileHeader->bfType2) != 0x4D)     //0x42 = 'B' && 0x4D = 'M'
     {
         fclose(filePtr);
-        return NULL;
+        printf("This is not a .bmp file!");
+        exit(-1);
     }
 
     //read the bitmap info header
     fread(bitmapInfoHeader, sizeof(BITMAPINFOHEADER), 1, filePtr);
+
+    // Check if the picture is uncopressed
+    if (bitmapInfoHeader->biCompression != 0){
+        printf("This file is not an uncompressed .bmp file");
+        exit(-1);
+    }
+    // Check if it a 24bit picture
+    if (bitmapInfoHeader->biBitCount != 24){
+        printf("The .bmp image is not 24 bits");
+        exit(-1);
+    }
 
     //allocate enough memory for the bitmap image data
     bitmapImage = (unsigned char *) malloc(bitmapInfoHeader->biSizeImage);
@@ -43,7 +58,8 @@ unsigned char *LoadBitmapFile(char *filename, BITMAPFILEHEADER *bitmapFileHeader
     if (!bitmapImage) {
         free(bitmapImage);
         fclose(filePtr);
-        return NULL;
+        printf("Not enough memory to allocate");
+        exit(-1);
     }
 
     //read in the bitmap image data
@@ -52,7 +68,8 @@ unsigned char *LoadBitmapFile(char *filename, BITMAPFILEHEADER *bitmapFileHeader
     //make sure bitmap image data was read
     if (bitmapImage == NULL) {
         fclose(filePtr);
-        return NULL;
+        printf("Not enough memory to allocate");
+        exit(-1);
     }
 
     //close file and return bitmap image data
