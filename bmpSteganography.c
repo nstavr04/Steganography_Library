@@ -74,10 +74,15 @@ int main(int argc, char *argv[]) {
         int counter = 2;  // program argument 1 Is the operations. (-grayscale)
         while (counter < argc) {
 
-
             bitmapData = LoadBitmapFile(argv[counter], &bitmapFileHeader, &bitmapInfoHeader);
 
             FILE *fp = fopen(argv[counter], "wb");
+
+            if(fp == NULL){
+                free(bitmapData);
+                printf("Unable to open");
+                exit(-1);
+            }
 
              pixels = getEachPixel(bitmapData, &bitmapInfoHeader);
 
@@ -108,16 +113,10 @@ int main(int argc, char *argv[]) {
             //Save the data of the secret Image
             secretImage = LoadBitmapFile(argv[4], &secretFileHeader, &secretInfoHeader);
 
-            if (bitmapInfoHeader.biHeight != secretInfoHeader.biHeight || bitmapInfoHeader.biWidth != bitmapInfoHeader.biHeight){
+            if (bitmapInfoHeader.biHeight != secretInfoHeader.biHeight || bitmapInfoHeader.biWidth != secretInfoHeader.biWidth){
                 free(bitmapData);
                 free(secretImage);
                 printf("For this operation you have to enter 2 images with the same dimensions");
-                exit(-1);
-            }
-
-            //Checking that the images have the same dimentions
-            if(bitmapInfoHeader.biWidth != secretInfoHeader.biWidth && bitmapInfoHeader.biHeight != secretInfoHeader.biHeight){
-                printf("Images need to have the same dimentions");
                 exit(-1);
             }
 
@@ -300,14 +299,15 @@ int main(int argc, char *argv[]) {
         int counter = 2;  // program argument 1 Is the operations. (-negativeFilter)
         while (counter < argc) {
 
+            bitmapData = LoadBitmapFile(argv[counter], &bitmapFileHeader, &bitmapInfoHeader);
+
 
             FILE *fp = fopen(argv[counter], "wb");
+
             if (fp == NULL) {
                 printf("unable to open");
                 exit(-1);
             }
-
-            bitmapData = LoadBitmapFile(argv[counter], &bitmapFileHeader, &bitmapInfoHeader);
 
             pixels = getEachPixel(bitmapData, &bitmapInfoHeader);
 
