@@ -4,6 +4,7 @@
 
 @author nstavr04 mvasil17
 
+
 This program implements different 24 bit .bmp image manipulations accordingly to the correct option used.
 All of the classes are combined into a bmp library and executed with bmpSteganorgaphy file. The options are as follows:
 
